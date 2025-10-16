@@ -7,6 +7,7 @@ import Systray from "./SysTray"
 
 export default function Bar(gdkmonitor: Gdk.Monitor) {
   const time = createPoll("", 1000, 'date "+%l:%M %p"')
+  const date = createPoll("", 1000, 'date "+%m/%d/%Y"')
   const { BOTTOM, LEFT, RIGHT } = Astal.WindowAnchor
   const ASSETS_PATH = `${GLib.get_current_dir()}/assets`
 
@@ -22,6 +23,7 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
     >
       <centerbox cssName="centerbox">
         <button
+          class="startbutton"
           $type="start"
           onClicked={() => execAsync("walker")}
           hexpand
@@ -29,7 +31,7 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
         >
           <image 
             file={`${ASSETS_PATH}/arch_blue.png`}
-            pixelSize={16}
+            pixelSize={20}
           />
         </button>
         <box $type="center" />
@@ -42,8 +44,11 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
               <Systray />
             </popover>
           </menubutton>
-          <menubutton>
-            <label label={time} />
+          <menubutton class="datetime">
+            <box orientation={Gtk.Orientation.VERTICAL}>
+              <label label={time} halign={Gtk.Align.END}/>
+              <label label={date} halign={Gtk.Align.END}/>
+            </box>
             <popover>
               <Gtk.Calendar />
             </popover>
