@@ -3,8 +3,9 @@ import { Astal, Gtk, Gdk } from "ags/gtk4"
 import { execAsync } from "ags/process"
 import { createPoll } from "ags/time"
 import GLib from "gi://GLib"
-import Systray from "./Systemtray/SysTrayButton"
-import SysTrayButton from "./Systemtray/SysTrayButton"
+import Systray from "./SystemTray/SysTrayButton"
+import SysTrayButton from "./SystemTray/SysTrayButton"
+import VolumeIndicator from "./Utilities/volumeindicator"
 
 export default function Bar(gdkmonitor: Gdk.Monitor) {
   const time = createPoll("", 1000, 'date "+%l:%M %p"')
@@ -44,7 +45,7 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
           >
             <box orientation={Gtk.Orientation.HORIZONTAL} spacing={6}>
               <label label="󰤨" halign={Gtk.Align.END}/>
-              <label label="" halign={Gtk.Align.END}/>
+              <VolumeIndicator />
             </box>
             <popover class="systraymenu">
               <Systray />
