@@ -13,8 +13,15 @@ window.Bar {
     background: $bg-color;
   }
 
+  button {
+    border-radius: 8px;
+    margin-top: 4px;
+    margin-bottom: 6px;
+  }
+
   .startbutton{
     background-color: transparent;
+    margin-left: 10px;
     &:hover {
       background-color: $hover-bg-color;
       box-shadow: $hover-shadow;
@@ -24,12 +31,24 @@ window.Bar {
     }
   }
 
-  button {
-    border-radius: 8px;
-    margin: 5px;
+  .datetime{
+    button{
+      background-color: transparent;
+      margin-right: 3px;
+
+      &:hover {
+      background-color: $hover-bg-color;
+      box-shadow: $hover-shadow;
+      }
+    }
+
+    label{
+      font-weight: normal;
+      font-size: 0.9rem;
+    }
   }
 
-  .datetime{
+  .utilities{
     button{
       background-color: transparent;
 
@@ -41,7 +60,7 @@ window.Bar {
 
     label{
       font-weight: normal;
-      font-size: 0.9rem;
+      font-size: 1rem;
     }
   }
 }
