@@ -6,6 +6,7 @@ import GLib from "gi://GLib"
 import Systray from "./SystemTray/SysTrayButton"
 import SysTrayButton from "./SystemTray/SysTrayButton"
 import VolumeIndicator from "./Utilities/volumeindicator"
+import HideWindowsButton from "./HideWindowsButton"
 
 export default function Bar(gdkmonitor: Gdk.Monitor) {
   const time = createPoll("", 1000, 'date "+%l:%M %p"')
@@ -60,6 +61,7 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
               <Gtk.Calendar />
             </popover>
           </menubutton>
+          <HideWindowsButton />
         </box>
       </centerbox>
     </window>

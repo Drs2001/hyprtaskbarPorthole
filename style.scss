@@ -31,23 +31,6 @@ window.Bar {
     }
   }
 
-  .datetime{
-    button{
-      background-color: transparent;
-      margin-right: 3px;
-
-      &:hover {
-      background-color: $hover-bg-color;
-      box-shadow: $hover-shadow;
-      }
-    }
-
-    label{
-      font-weight: normal;
-      font-size: 0.9rem;
-    }
-  }
-
   .utilities{
     button{
       background-color: transparent;
@@ -61,6 +44,33 @@ window.Bar {
     label{
       font-weight: normal;
       font-size: 1rem;
+    }
+  }
+
+  .datetime{
+    button{
+      background-color: transparent;
+
+      &:hover {
+      background-color: $hover-bg-color;
+      box-shadow: $hover-shadow;
+      }
+    }
+
+    label{
+      font-weight: normal;
+      font-size: 0.9rem;
+    }
+  }
+
+  .hidewindowsbutton{
+    background-color: transparent;
+    margin-right: 3px;
+    padding: 0.2rem;
+
+    &:hover {
+      background-color: $hover-bg-color;
+      box-shadow: $hover-shadow;
     }
   }
 }
