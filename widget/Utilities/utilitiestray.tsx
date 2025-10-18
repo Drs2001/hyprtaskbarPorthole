@@ -1,5 +1,8 @@
 import AstalTray from 'gi://AstalTray';
 import { Gtk } from 'ags/gtk4';
+import GLib from "gi://GLib"
+import NetworkIndicator from "./networkindicator"
+import { execAsync } from 'ags/process';
 
 export interface UtilsTrayProps {
   iconSize?: number; // default 16
@@ -7,50 +10,86 @@ export interface UtilsTrayProps {
 }
 
 export default function UtilsTray({ iconSize = 16, spacing = 10 }: UtilsTrayProps) {
-  const tray = AstalTray.Tray.get_default()
-  // Container for tray icons
-  const trayBox = new Gtk.Box({ orientation: Gtk.Orientation.HORIZONTAL, spacing: spacing })
-  const trayIcons: Gtk.Image[] = []
 
+  // Button bar
+  const buttonBox = new Gtk.Box({ orientation: Gtk.Orientation.HORIZONTAL, spacing: 6 })
+  
+  // Content area
+  const contentBox = new Gtk.Box({ orientation: Gtk.Orientation.VERTICAL, spacing: 6 })
+  
+  // Wrap button and content into a vertical box for tray
+  const mainBox = new Gtk.Box({ orientation: Gtk.Orientation.VERTICAL, spacing: 6 })
+  mainBox.append(buttonBox)
+  // mainBox.append(contentBox)
 
-  function updateTrayItems() {
-  // Remove old widgets from trayBox
-  for (const icon of trayIcons) {
-    trayBox.remove(icon)
-  }
-  trayIcons.length = 0
+  // Create content widgets
+  const bluetoothWidget = new Gtk.Button({ label: "" })
+  const networkWidget = new Gtk.Button({ label: "󰀂" })
+  const volumeWidget = new Gtk.Button({ label: "" })
+  const systemWidget = new Gtk.Button({ label: "󰍛" })
 
-  // Add new tray items
-  const items = tray.get_items()
-  for (const item of items) {
-    const icon = item.get_gicon()
-    if (!icon) continue
+  bluetoothWidget.connect("clicked", () => {
+    execAsync(["blueberry"])
+    .then((out) => console.log(out))
+    .catch((err) => console.error(err))
+  })
 
-    const image = new Gtk.Image({ gicon: icon, pixel_size: iconSize })
-    const gesture = new Gtk.GestureClick({ button: 3 })
-    gesture.connect("pressed", () => {
-      const menuModel = item.get_menu_model() // returns Gio.MenuModel | null
-      if (menuModel) {
-        const popoverMenu = new Gtk.PopoverMenu({ menu_model: menuModel, has_arrow: false })
-        popoverMenu.set_parent(image)  // anchor to the tray icon
-        popoverMenu.insert_action_group('dbusmenu', item.get_action_group())
-        popoverMenu.popup()
-      }
-    })
-    image.add_controller(gesture)
+  networkWidget.connect("clicked", () => {
+    execAsync(["nm-connection-editor"])
+    .then((out) => console.log(out))
+    .catch((err) => console.error(err))
+  })
 
-    trayBox.append(image)
-    trayIcons.push(image)
-  }
-}
+  volumeWidget.connect("clicked", () => {
+    execAsync(["kitty", "--class=Wiremix", "-e", "wiremix"])
+    .then((out) => console.log(out))
+    .catch((err) => console.error(err))
+  })
 
+  systemWidget.connect("clicked", () => {
+    execAsync(["missioncenter"])
+    .then((out) => console.log(out))
+    .catch((err) => console.error(err))
+  })
 
-  // Initial render
-  updateTrayItems()
+  buttonBox.append(bluetoothWidget)
+  buttonBox.append(networkWidget)
+  buttonBox.append(volumeWidget)
+  buttonBox.append(systemWidget)
 
-  // Listen for new items added/removed dynamically
-  tray.connect("item-added", updateTrayItems)
-  tray.connect("item-removed", updateTrayItems)
+  // // Store them in a map for easy switching
+  // const panels = {
+  //   Net: networkWidget,
+  //   Sys: systemWidget,
+  //   Vol: volumeWidget,
+  // }
 
-  return trayBox
+  // // Add all widgets to contentBox but hide them initially
+  // Object.values(panels).forEach(w => {
+  //   contentBox.append(w)
+  //   w.hide()
+  // })
+
+  // // Function to switch visible panel
+  // let currentPanel: Gtk.Widget | null = null
+  // const showPanel = (name: keyof typeof panels) => {
+  //   if (currentPanel) currentPanel.hide()
+  //   currentPanel = panels[name]
+  //   currentPanel.show()
+  // }
+
+  // // Buttons
+  // Object.keys(panels).forEach(name => {
+  //   const btn = new Gtk.Button({ label: name })
+  //   btn.connect("clicked", () => showPanel(name as keyof typeof panels))
+  //   buttonBox.append(btn)
+  // })
+
+  // // Show the first panel by default
+  // GLib.idle_add(GLib.PRIORITY_DEFAULT_IDLE, () => {
+  //   showPanel("Net")
+  //   return GLib.SOURCE_REMOVE
+  // })
+
+  return mainBox
 }

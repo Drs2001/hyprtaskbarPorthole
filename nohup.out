@@ -1,0 +1,73 @@
+
+(gjs:107518): Adwaita-WARNING **: 16:56:54.159: Using GtkSettings:gtk-application-prefer-dark-theme with libadwaita is unsupported. Please use AdwStyleManager:color-scheme instead.
+
+(gjs:107518): Gjs-WARNING **: 16:57:13.247: Unhandled promise rejection. To suppress this warning, add an error handler to your promise chain with .catch() or a try-catch block around your await expression. Stack trace of the failed promise:
+execAsyncv@file:///run/user/1000/dmFyIF-ags.js:1536:12
+execAsync@file:///run/user/1000/dmFyIF-ags.js:1560:21
+execAsync@file:///run/user/1000/dmFyIF-ags.js:1597:20
+onClicked@file:///run/user/1000/dmFyIF-ags.js:2054:39
+_init/GLib.MainLoop.prototype.runAsync/</<@resource:///org/gnome/gjs/modules/core/overrides/GLib.js:263:34
+
+ags-Message: 17:06:45.600: 
+ags-Message: 18:58:37.574: 
+ags-Message: 18:58:46.190: 
+ags-Message: 19:05:36.626: 
+ags-Message: 19:05:37.944: 
+ags-Message: 19:24:54.988: 
+ags-Message: 19:35:57.142: 
+ags-Message: 19:38:47.297: 
+
+(gjs:107518): ags-CRITICAL **: 19:39:17.974: Error
+execAsyncv/</<@file:///run/user/1000/dmFyIF-ags.js:1543:20
+_init/GLib.MainLoop.prototype.runAsync/</<@resource:///org/gnome/gjs/modules/core/overrides/GLib.js:263:34
+  
+ags-Message: 22:05:34.254: 
+ags-Message: 22:15:46.144: 
+ags-Message: 22:15:57.241: 
+ags-Message: 22:16:27.956: 
+
+(gjs:107518): GLib-GObject-CRITICAL **: 22:17:12.736: invalid (NULL) pointer instance
+
+(gjs:107518): GLib-GObject-CRITICAL **: 22:17:12.736: g_signal_emit_by_name: assertion 'G_TYPE_CHECK_INSTANCE (instance)' failed
+
+(gjs:107518): Gjs-WARNING **: 23:35:46.585: Unhandled promise rejection. To suppress this warning, add an error handler to your promise chain with .catch() or a try-catch block around your await expression. Stack trace of the failed promise:
+execAsyncv@file:///run/user/1000/dmFyIF-ags.js:1536:12
+execAsync@file:///run/user/1000/dmFyIF-ags.js:1560:21
+execAsync@file:///run/user/1000/dmFyIF-ags.js:1597:20
+onClicked@file:///run/user/1000/dmFyIF-ags.js:2054:39
+_init/GLib.MainLoop.prototype.runAsync/</<@resource:///org/gnome/gjs/modules/core/overrides/GLib.js:263:34
+
+
+(gjs:107518): Gjs-WARNING **: 23:37:54.756: Unhandled promise rejection. To suppress this warning, add an error handler to your promise chain with .catch() or a try-catch block around your await expression. Stack trace of the failed promise:
+execAsyncv@file:///run/user/1000/dmFyIF-ags.js:1536:12
+execAsync@file:///run/user/1000/dmFyIF-ags.js:1560:21
+execAsync@file:///run/user/1000/dmFyIF-ags.js:1597:20
+onClicked@file:///run/user/1000/dmFyIF-ags.js:2054:39
+_init/GLib.MainLoop.prototype.runAsync/</<@resource:///org/gnome/gjs/modules/core/overrides/GLib.js:263:34
+
+ags-Message: 23:53:14.392: 
+ags-Message: 00:38:02.474: 
+Gdk-Message: 01:07:00.532: Lost connection to Wayland compositor.
+
+(gjs:2308): Adwaita-WARNING **: 01:49:30.608: Using GtkSettings:gtk-application-prefer-dark-theme with libadwaita is unsupported. Please use AdwStyleManager:color-scheme instead.
+
+(gjs:2308): Gtk-WARNING **: 01:54:06.079: Broken accounting of active state for widget 0x55fb2e6299a0(GtkLabel)
+
+(gjs:2308): Gtk-WARNING **: 01:54:06.079: Broken accounting of active state for widget 0x55fb2e62abb0(GtkBox)
+
+(gjs:2308): Gtk-WARNING **: 01:54:06.079: Broken accounting of active state for widget 0x55fb2eca4510(GtkGizmo)
+
+(gjs:2308): Gtk-WARNING **: 01:54:06.079: Broken accounting of active state for widget 0x55fb2f142ab0(GtkBox)
+
+(gjs:2308): Gtk-WARNING **: 01:54:06.079: Broken accounting of active state for widget 0x55fb2f140a60(GtkToggleButton)
+
+(gjs:2308): Gtk-WARNING **: 01:54:10.378: Broken accounting of active state for widget 0x55fb2eb78070(GtkLabel)
+
+(gjs:2308): Gtk-WARNING **: 01:54:10.378: Broken accounting of active state for widget 0x55fb2eb65670(GtkBox)
+
+(gjs:2308): Gtk-WARNING **: 01:54:10.378: Broken accounting of active state for widget 0x55fb2e7b28c0(GtkGizmo)
+
+(gjs:2308): Gtk-WARNING **: 01:54:10.378: Broken accounting of active state for widget 0x55fb2eb887b0(GtkBox)
+
+(gjs:2308): Gtk-WARNING **: 01:54:10.378: Broken accounting of active state for widget 0x7fbca80495a0(GtkToggleButton)
+Gdk-Message: 02:02:20.092: Lost connection to Wayland compositor.
