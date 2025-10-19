@@ -8,39 +8,29 @@ export default function UtilsPopover() {
   const popoverMenu = new Gtk.Popover()
   popoverMenu.add_css_class("systraymenu")
 
-  // Wrap button and content into a vertical box for tray
-  const mainBox = new Gtk.Box({ orientation: Gtk.Orientation.VERTICAL, spacing: 6 })
+  // Create a stack for animated transitions
+  const stack = new Gtk.Stack({
+    transition_type: Gtk.StackTransitionType.SLIDE_LEFT,
+    transition_duration: 500, // ms
+  });
 
-  popoverMenu.set_child(mainBox)
-
-  // Clears the children of the main box
-  function clearChildren() {
-    let child;
-    while ((child = mainBox.get_first_child())) {
-      mainBox.remove(child);
-    }
-  }
-
-  // Clear mainBox and update it to the new one
-  function updateBox(box: Gtk.Box) {
-    clearChildren()
-    mainBox.append(box)
-  }
+  popoverMenu.set_child(stack)
 
   // Button bar (Default view for the utilities popover)
   const buttonBox = new Gtk.Box({ orientation: Gtk.Orientation.HORIZONTAL, spacing: 6 })
 
-  // Set the popover view to the button box
-  mainBox.append(buttonBox)
-
   // Declare back button to be used in sub-menus
   const backButton = new Gtk.Button({ label: "<--" })
   backButton.connect("clicked", () => {
-    updateBox(buttonBox)
+    stack.transition_type = Gtk.StackTransitionType.SLIDE_RIGHT
+    stack.set_visible_child(buttonBox)
   })
 
   // Declare sub-menus
   const bluetoothMenu = BluetoothMenu(backButton)
+
+  stack.add_named(buttonBox, "main")
+  stack.add_named(bluetoothMenu, "bluetooth")
 
   // Create buttons
   const bluetoothWidget = new Gtk.Button({ label: "" })
@@ -49,7 +39,8 @@ export default function UtilsPopover() {
   const systemWidget = new Gtk.Button({ label: "󰍛" })
 
   bluetoothWidget.connect("clicked", () => {
-    updateBox(bluetoothMenu)
+    stack.transition_type = Gtk.StackTransitionType.SLIDE_LEFT
+    stack.set_visible_child(bluetoothMenu)
   })
 
   networkWidget.connect("clicked", () => {
@@ -76,7 +67,7 @@ export default function UtilsPopover() {
   buttonBox.append(systemWidget)
 
   popoverMenu.connect("closed", () =>{
-      updateBox(buttonBox)
+      stack.set_visible_child(buttonBox)
   })
 
   return popoverMenu
