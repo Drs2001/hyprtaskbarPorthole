@@ -2,10 +2,9 @@
 Windows like taskbar for hyprland
 
 # Required packages
-- ags
+- aylurs-gtk-shell-git
 - libastal-tray-git
 - libastal-notifd-git
-- astal-notifd
 - libastal-wireplumber-git
 - libastal-hyprland-git
 - libastal-network-git

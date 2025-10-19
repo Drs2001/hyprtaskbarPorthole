@@ -7,7 +7,7 @@ import SysTrayButton from "./SystemTray/SysTrayButton"
 import VolumeIndicator from "./Utilities/volumeindicator"
 import HideWindowsButton from "./HideWindowsButton"
 import NetworkIndicator from "./Utilities/networkindicator"
-import UtilsTray from "./Utilities/utilitiestray"
+import UtilsPopover from "./Utilities/utilitiespopover"
 
 export default function Bar(gdkmonitor: Gdk.Monitor) {
   const time = createPoll("", 1000, 'date "+%l:%M %p"')
@@ -49,9 +49,7 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
               <NetworkIndicator />
               <VolumeIndicator />
             </box>
-            <popover class="systraymenu">
-              <UtilsTray />
-            </popover>
+            <UtilsPopover />
           </menubutton>
           <menubutton class="datetime">
             <box orientation={Gtk.Orientation.VERTICAL}>
