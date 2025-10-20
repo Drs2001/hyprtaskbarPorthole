@@ -1,7 +1,7 @@
 import { Gtk } from 'ags/gtk4';
 import GLib from "gi://GLib"
 import { execAsync } from 'ags/process';
-import BluetoothMenu from './bluetoothmenu';
+import BluetoothMenu from './Bluetooth/bluetoothmenu';
 
 export default function UtilsPopover() {
   const popoverMenu = new Gtk.Popover()
@@ -16,15 +16,12 @@ export default function UtilsPopover() {
   });
 
   stack.set_vhomogeneous(false);
-  stack.set_vexpand(false);
   stack.set_hexpand(false);
 
   popoverMenu.set_child(stack)
 
   // Button bar (Default view for the utilities popover)
   const buttonBox = new Gtk.Box({ orientation: Gtk.Orientation.HORIZONTAL, spacing: 6 })
-  buttonBox.set_vexpand(false);
-  buttonBox.set_hexpand(false);
   buttonBox.set_valign(Gtk.Align.START);
 
   // Declare back button to be used in sub-menus
