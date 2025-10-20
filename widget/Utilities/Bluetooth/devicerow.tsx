@@ -13,6 +13,7 @@ export default function DeviceRow(
     halign: Gtk.Align.START,
     xalign: 0,
   });
+  statusLabel.add_css_class("statusLabel")
 
   // The action button inside the revealer
   const actionButton = new Gtk.Button({
@@ -97,7 +98,7 @@ export default function DeviceRow(
 
   deviceBox.append(header);
   deviceBox.append(revealer);
-  deviceBox.append(new Gtk.Separator({ orientation: Gtk.Orientation.HORIZONTAL }));
+  deviceBox.add_css_class("devicerow")
 
   return deviceBox;
 }

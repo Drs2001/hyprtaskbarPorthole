@@ -21,11 +21,11 @@ export default function BluetoothMenu(backButton: Gtk.Button) {
 
     // Middle section containing the paired devices list
     const pariedDevicesBox = new Gtk.Box({ orientation: Gtk.Orientation.VERTICAL, spacing: 6 })
-    pariedDevicesBox.append(new Gtk.Label({label: "Paired devices", halign: Gtk.Align.START}))
+    pariedDevicesBox.append(new Gtk.Label({label: "Paired devices", halign: Gtk.Align.START, cssClasses: ["subheading"]}))
 
     // Bottom section containing the non-paired device list
     const discoveredDevicesBox = new Gtk.Box({ orientation: Gtk.Orientation.VERTICAL, spacing: 6 })
-    discoveredDevicesBox.append(new Gtk.Label({label: "Not paired", halign: Gtk.Align.START}))
+    discoveredDevicesBox.append(new Gtk.Label({label: "Not paired", halign: Gtk.Align.START, cssClasses: ["subheading"]}))
 
     try {
         adapter?.start_discovery();
@@ -113,6 +113,7 @@ export default function BluetoothMenu(backButton: Gtk.Button) {
 
     mainBox.append(titleBox)
     mainBox.append(pariedDevicesBox)
+    mainBox.append(new Gtk.Separator({ orientation: Gtk.Orientation.HORIZONTAL, cssClasses: ["seperator"]}));
     mainBox.append(discoveredDevicesBox)
 
     // === Wrap mainBox in a scrolled window ===
@@ -122,6 +123,7 @@ export default function BluetoothMenu(backButton: Gtk.Button) {
         overlay_scrolling: true, // optional: nice overlay scrollbars
     });
 
+    scroller.add_css_class("bluetoothmenu")
     scroller.set_child(mainBox)
 
     // Optional: force a fixed size for the popover content
@@ -132,9 +134,9 @@ export default function BluetoothMenu(backButton: Gtk.Button) {
     })
 
     // TODO when the menu opens
-    scroller.connect("map", () =>{
-        console.log("OPEN")
-    })
+    // scroller.connect("map", () =>{
+    //     console.log("OPEN")
+    // })
 
 
     return scroller

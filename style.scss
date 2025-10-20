@@ -1,8 +1,11 @@
 // https://gitlab.gnome.org/GNOME/gtk/-/blob/gtk-3-24/gtk/theme/Adwaita/_colors-public.scss
 $fg-color: #{"@theme_fg_color"};
-$bg-color: #{"@theme_bg_color"};
+// $bg-color: #{"@theme_bg_color"};
+$bg-color: #222226;
+$border-color: #434345;
 $hover-bg-color: rgba(255, 255, 255, 0.08);
 $hover-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+$font-family: "Segoe UI", "Tahoma", "Geneva", "Verdana", "sans-serif";
 
 window.Bar {
   background: transparent;
@@ -94,17 +97,51 @@ window.Bar {
 }
 
 .systraymenu{
+  $bg-opacity: 0.98;
+  // font-family: font-family;
+
   > contents {
     border-radius: 5px;
+    border-color: $border-color;
+    border-width: 1.5px;
     padding: 0rem;
-
-    > box{
-    }
+    background-color: rgba($bg-color, $bg-opacity);
   }
 
   > arrow {
     -gtk-icon-source: none;      /* remove the arrow graphic */
     background: transparent; 
+  }
+
+  .popovermenustack{
+    background-color: transparent;
+  }
+
+  .bluetoothmenu{
+    background-color: transparent;
+    > box{
+    }
+
+    .seperator{
+      min-height: 1.5px;
+    }
+
+    .subheading{
+      padding-left: 10px;
+      font-weight: bold;
+      margin-bottom: 5px;
+      margin-top: 5px;
+    }
+
+    .devicerow{
+      padding-left: 5px;
+      padding-right: 5px;
+      .statusLabel{
+        font-size: 0.8rem;
+        padding-top: 5px;
+      }
+
+    }
   }
 }
 

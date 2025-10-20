@@ -7,7 +7,7 @@ export default function UtilsPopover() {
   const popoverMenu = new Gtk.Popover()
   popoverMenu.add_css_class("systraymenu")
 
-  popoverMenu.set_autohide(false); // TEMPORARY FOR DEBUGGING REMOVE FOR FINAL BUILD
+  // popoverMenu.set_autohide(false); // TEMPORARY FOR DEBUGGING REMOVE FOR FINAL BUILD
 
   // Create a stack for animated transitions
   const stack = new Gtk.Stack({
@@ -17,6 +17,7 @@ export default function UtilsPopover() {
 
   stack.set_vhomogeneous(false);
   stack.set_hexpand(false);
+  stack.add_css_class("popovermenustack")
 
   popoverMenu.set_child(stack)
 
@@ -25,7 +26,7 @@ export default function UtilsPopover() {
   buttonBox.set_valign(Gtk.Align.START);
 
   // Declare back button to be used in sub-menus
-  const backButton = new Gtk.Button({ label: "<--" })
+  const backButton = new Gtk.Button({ label: "<-" })
   backButton.connect("clicked", () => {
     stack.transition_type = Gtk.StackTransitionType.SLIDE_RIGHT
     stack.set_visible_child(buttonBox)
