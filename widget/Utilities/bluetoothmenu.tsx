@@ -1,33 +1,37 @@
-import AstalTray from 'gi://AstalTray';
 import { Gtk } from 'ags/gtk4';
 import GLib from "gi://GLib"
-import { execAsync } from 'ags/process';
+import Bluetooth from "gi://AstalBluetooth"
 
 export default function BluetoothMenu(backButton: Gtk.Button) {
-  // Wrap button and content into a vertical box for tray
-  const mainBox = new Gtk.Box({ orientation: Gtk.Orientation.VERTICAL, spacing: 6 })
+    const bluetooth = Bluetooth.get_default()
+    const adapter = bluetooth.get_adapter()
 
-  // Clears the children of the main box
-  function clearChildren() {
-    let child;
-    while ((child = mainBox.get_first_child())) {
-      mainBox.remove(child);
+    for( const device of bluetooth.get_devices()) {
+        console.log(device.name)
+        console.log(device.paired)
+        console.log(device.connected)
     }
-  }
 
-  // Clear mainBox and update it to the new one
-  function updateBox(box: Gtk.Box) {
-    clearChildren()
-    mainBox.append(box)
-  }
-  
-  // Content area
-  const contentBox = new Gtk.Box({ orientation: Gtk.Orientation.VERTICAL, spacing: 6 })
+    // Wrap button and content into a vertical box for tray
+    const mainBox = new Gtk.Box({ orientation: Gtk.Orientation.VERTICAL, spacing: 6 })
 
-  contentBox.append(backButton)
+    // Top bar containing the back button, title, and bluetooth toggle
+    const topBox = new Gtk.Box({ orientation: Gtk.Orientation.HORIZONTAL, spacing: 6 })
+    topBox.append(backButton)
+    topBox.append(new Gtk.Label({label: "Bluetooth", halign: Gtk.Align.START}))
 
-  mainBox.append(contentBox)
+    // Middle section containing the paired devices list
+    const middleBox = new Gtk.Box({ orientation: Gtk.Orientation.VERTICAL, spacing: 6 })
+    middleBox.append(new Gtk.Label({label: "Paired devices", halign: Gtk.Align.START}))
+
+    // Bottom section containing the non-paired device list
+    const bottomBox = new Gtk.Box({ orientation: Gtk.Orientation.VERTICAL, spacing: 6 })
+    bottomBox.append(new Gtk.Label({label: "Not paired", halign: Gtk.Align.START}))
+
+    mainBox.append(topBox)
+    mainBox.append(middleBox)
+    mainBox.append(bottomBox)
 
 
-  return mainBox
+    return mainBox
 }

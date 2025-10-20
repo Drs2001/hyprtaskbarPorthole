@@ -8,6 +8,7 @@ Windows like taskbar for hyprland
 - libastal-wireplumber-git
 - libastal-hyprland-git
 - libastal-network-git
+- libastal-bluetooth-git
 
 
 # How to run

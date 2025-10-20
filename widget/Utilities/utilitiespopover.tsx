@@ -1,4 +1,3 @@
-import AstalTray from 'gi://AstalTray';
 import { Gtk } from 'ags/gtk4';
 import GLib from "gi://GLib"
 import { execAsync } from 'ags/process';
@@ -8,16 +7,25 @@ export default function UtilsPopover() {
   const popoverMenu = new Gtk.Popover()
   popoverMenu.add_css_class("systraymenu")
 
+  popoverMenu.set_autohide(false); // TEMPORARY FOR DEBUGGING REMOVE FOR FINAL BUILD
+
   // Create a stack for animated transitions
   const stack = new Gtk.Stack({
     transition_type: Gtk.StackTransitionType.SLIDE_LEFT,
-    transition_duration: 500, // ms
+    transition_duration: 200, // ms
   });
+
+  stack.set_vhomogeneous(false);
+  stack.set_vexpand(false);
+  stack.set_hexpand(false);
 
   popoverMenu.set_child(stack)
 
   // Button bar (Default view for the utilities popover)
   const buttonBox = new Gtk.Box({ orientation: Gtk.Orientation.HORIZONTAL, spacing: 6 })
+  buttonBox.set_vexpand(false);
+  buttonBox.set_hexpand(false);
+  buttonBox.set_valign(Gtk.Align.START);
 
   // Declare back button to be used in sub-menus
   const backButton = new Gtk.Button({ label: "<--" })
