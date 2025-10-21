@@ -3,13 +3,12 @@ import GLib from "gi://GLib"
 import Bluetooth from "gi://AstalBluetooth"
 import DeviceRow from "./devicerow"
 import { timeout } from "ags/time"
+import BluetoothController from "./bluetoothController";
 
 export default function BluetoothMenu(backButton: Gtk.Button) {
-    const bluetooth = Bluetooth.get_default()
-    const adapter = bluetooth.get_adapter()
-    const connectedDevices: Bluetooth.Device[] = []
-    const pairedDevices: Bluetooth.Device[] = []
-    const discoveredDevices: Bluetooth.Device[] = []
+    const bt = new BluetoothController()
+    let pairedDevices: Bluetooth.Device[] = []
+    let discoveredDevices: Bluetooth.Device[] = []
 
     // Wrap title box, scroller, and bottombox
     const mainBox = new Gtk.Box({ orientation: Gtk.Orientation.VERTICAL, spacing: 6 })
@@ -34,56 +33,13 @@ export default function BluetoothMenu(backButton: Gtk.Button) {
     const bottomBox = new Gtk.Box({ orientation: Gtk.Orientation.HORIZONTAL, halign: Gtk.Align.END, spacing: 6 })
     const refreshButton = new Gtk.Button({ label: "Refresh"})
     refreshButton.connect("clicked", () =>{
-        try {
-            if(adapter?.discovering){
-                return adapter?.stop_discovery()
-            }
-
-            adapter?.start_discovery();
-
-            const discoveryTimeout = 10000
-            timeout(discoveryTimeout, () => {
-                if(adapter?.discovering){
-                    adapter.stop_discovery()
-                }
-            })
-        } catch (err) {
-            print(`Failed to start discovery: ${err}`);
-        }
+        bt.discoverNewDevices(refreshDiscoveredDevices)
     })
     bottomBox.append(refreshButton)
 
-    // Function to get paired and connected devices and populate their lists
-    function getPairedDevices(){
-        // Reset arrays
-        connectedDevices.length = 0
-        pairedDevices.length = 0
-        for(const device of bluetooth.get_devices()){
-            if(device.get_paired()){
-                if(device.get_connected()){
-                    connectedDevices.push(device)
-                }
-                else{
-                    pairedDevices.push(device)
-                }
-            }
-        }
-    }
-
-    // Gets a list of discovered devices
-    function getDiscoveredDevices(){
-        // Reset arrays
-        discoveredDevices.length = 0
-        for(const device of bluetooth.get_devices()){
-            if(!device.get_paired() && device.name){
-                discoveredDevices.push(device)
-            }
-        }
-    }
-
     // Refreshes the paired devices list
     function refreshPairedDevices(){
-        getPairedDevices()
+        pairedDevices = bt.getPairedDevices()
         // Empty the box
         const title = pariedDevicesBox.get_first_child()
         let child = title?.get_next_sibling() || null
@@ -91,10 +47,6 @@ export default function BluetoothMenu(backButton: Gtk.Button) {
             const next = child.get_next_sibling()
             pariedDevicesBox.remove(child)
             child = next
-        }
-        for(const device of connectedDevices){
-            const deviceRow = DeviceRow(device, refreshPairedDevices)
-            pariedDevicesBox.append(deviceRow)
         }
         for(const device of pairedDevices){
             const deviceRow = DeviceRow(device, refreshPairedDevices)
@@ -112,7 +64,7 @@ export default function BluetoothMenu(backButton: Gtk.Button) {
             child = next
         }
 
-        getDiscoveredDevices()
+        discoveredDevices = bt.getDiscoveredDevices()
         for(const device of discoveredDevices){
             const deviceRow = DeviceRow(device, refreshAllDevices)
             discoveredDevicesBox.append(deviceRow)
@@ -149,13 +101,23 @@ export default function BluetoothMenu(backButton: Gtk.Button) {
     // Optional: force a fixed size for the popover content
     scroller.set_size_request(-1, 400) // width x height in pixels
 
+    const test = new Gtk.ProgressBar({
+        fraction: 0,
+    })
+
     mainBox.append(titleBox)
+    mainBox.append(test)
     mainBox.append(scroller)
     mainBox.append(bottomBox)
 
-    adapter?.connect("notify::discovering", () =>{
-        refreshDiscoveredDevices()
-    })
+    // Function to pulse the progress bar
+    function pulseProgressBar() {
+        test.pulse();  // animate a small step
+        return true;   // returning true keeps the timeout repeating
+    }
+
+    // Set a timer to pulse every 50ms
+    GLib.timeout_add(GLib.PRIORITY_DEFAULT, 50, pulseProgressBar);
 
     // TODO when the menu opens
     // scroller.connect("map", () =>{

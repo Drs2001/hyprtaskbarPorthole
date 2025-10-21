@@ -1,11 +1,13 @@
 import { Gtk } from "ags/gtk4";
 import { timeout } from "ags/time"
 import Bluetooth from "gi://AstalBluetooth";
+import BluetoothController from "./bluetoothController"
 
 export default function DeviceRow(
   device: Bluetooth.Device,
   refreshDevices?: (() => void) | null
 ): Gtk.Widget {
+  const bt = new BluetoothController()
   const deviceName = device.get_name() || "Unknown Device";
 
   const statusLabel = new Gtk.Label({
@@ -30,10 +32,20 @@ export default function DeviceRow(
       } catch (err) {
         print(`Failed to connect: ${err}`);
       }
-      
     } else {
       try {
-        device.connect_device(null);
+        if(device.paired){
+          device.connect_device(null);
+        }
+        else{
+          bt.pairDevice(device)
+          .then(() => {
+          })
+          .catch((err) => {
+              statusLabel.label = "Pairing failed";
+              console.error("Pairing error:", err);
+          });
+        }
         statusLabel.label = "Conecting..."
         timer = timeout(10000, () => {
           if(!device.get_connected()){
@@ -49,12 +61,32 @@ export default function DeviceRow(
 
   // This doesn't just notify when connected but for any connection change
   device.connect("notify::connected", () => {
-    if(device.get_connected()){
+    if(device.get_connected() && device.get_paired()){
       if(timer){
         timer.cancel()
         timer = null
       }
-      if (refreshDevices) refreshDevices();
+
+      if (refreshDevices){ 
+        refreshDevices()
+      }
+    }
+    else if(device.get_paired()){
+      if (refreshDevices){ 
+        refreshDevices()
+      }
+    }
+  })
+
+  device.connect("notify::trusted", () => {
+  })
+
+  device.connect("notify::paired", () => {
+    device.set_trusted(true)
+    device.connect_device(null)
+    
+    if (refreshDevices){ 
+        refreshDevices()
     }
   })
 
