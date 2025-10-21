@@ -7,7 +7,7 @@ export default function UtilsPopover() {
   const popoverMenu = new Gtk.Popover()
   popoverMenu.add_css_class("systraymenu")
 
-  // popoverMenu.set_autohide(false); // TEMPORARY FOR DEBUGGING REMOVE FOR FINAL BUILD
+  popoverMenu.set_autohide(false); // TEMPORARY FOR DEBUGGING REMOVE FOR FINAL BUILD
 
   // Create a stack for animated transitions
   const stack = new Gtk.Stack({

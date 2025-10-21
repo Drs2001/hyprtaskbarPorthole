@@ -11,8 +11,11 @@ export default function BluetoothMenu(backButton: Gtk.Button) {
     const pairedDevices: Bluetooth.Device[] = []
     const discoveredDevices: Bluetooth.Device[] = []
 
-    // Wrap button and content into a vertical box for tray
+    // Wrap title box, scroller, and bottombox
     const mainBox = new Gtk.Box({ orientation: Gtk.Orientation.VERTICAL, spacing: 6 })
+
+    // Wrap button and content into a vertical box for tray
+    const devicesBox = new Gtk.Box({ orientation: Gtk.Orientation.VERTICAL, spacing: 6 })
 
     // Top bar containing the back button, title, and bluetooth toggle
     const titleBox = new Gtk.Box({ orientation: Gtk.Orientation.HORIZONTAL, spacing: 6 })
@@ -23,15 +26,32 @@ export default function BluetoothMenu(backButton: Gtk.Button) {
     const pariedDevicesBox = new Gtk.Box({ orientation: Gtk.Orientation.VERTICAL, spacing: 6 })
     pariedDevicesBox.append(new Gtk.Label({label: "Paired devices", halign: Gtk.Align.START, cssClasses: ["subheading"]}))
 
-    // Bottom section containing the non-paired device list
+    // Lower middle section containing the non-paired device list
     const discoveredDevicesBox = new Gtk.Box({ orientation: Gtk.Orientation.VERTICAL, spacing: 6 })
     discoveredDevicesBox.append(new Gtk.Label({label: "Not paired", halign: Gtk.Align.START, cssClasses: ["subheading"]}))
 
-    try {
-        adapter?.start_discovery();
-    } catch (err) {
-        print(`Failed to start discovery: ${err}`);
-    }
+    // Bottom section containing the settings button and refresh button
+    const bottomBox = new Gtk.Box({ orientation: Gtk.Orientation.HORIZONTAL, halign: Gtk.Align.END, spacing: 6 })
+    const refreshButton = new Gtk.Button({ label: "Refresh"})
+    refreshButton.connect("clicked", () =>{
+        try {
+            if(adapter?.discovering){
+                return adapter?.stop_discovery()
+            }
+
+            adapter?.start_discovery();
+
+            const discoveryTimeout = 10000
+            timeout(discoveryTimeout, () => {
+                if(adapter?.discovering){
+                    adapter.stop_discovery()
+                }
+            })
+        } catch (err) {
+            print(`Failed to start discovery: ${err}`);
+        }
+    })
+    bottomBox.append(refreshButton)
 
     // Function to get paired and connected devices and populate their lists
     function getPairedDevices(){
@@ -55,7 +75,7 @@ export default function BluetoothMenu(backButton: Gtk.Button) {
         // Reset arrays
         discoveredDevices.length = 0
         for(const device of bluetooth.get_devices()){
-            if(!device.get_paired()){
+            if(!device.get_paired() && device.name){
                 discoveredDevices.push(device)
             }
         }
@@ -111,10 +131,10 @@ export default function BluetoothMenu(backButton: Gtk.Button) {
     // Get initial discovered devices
     refreshDiscoveredDevices()
 
-    mainBox.append(titleBox)
-    mainBox.append(pariedDevicesBox)
-    mainBox.append(new Gtk.Separator({ orientation: Gtk.Orientation.HORIZONTAL, cssClasses: ["seperator"]}));
-    mainBox.append(discoveredDevicesBox)
+    devicesBox.append(pariedDevicesBox)
+    devicesBox.append(new Gtk.Separator({ orientation: Gtk.Orientation.HORIZONTAL, cssClasses: ["seperator"]}));
+    devicesBox.append(discoveredDevicesBox)
+    
 
     // === Wrap mainBox in a scrolled window ===
     const scroller = new Gtk.ScrolledWindow({
@@ -124,10 +144,14 @@ export default function BluetoothMenu(backButton: Gtk.Button) {
     });
 
     scroller.add_css_class("bluetoothmenu")
-    scroller.set_child(mainBox)
+    scroller.set_child(devicesBox)
 
     // Optional: force a fixed size for the popover content
     scroller.set_size_request(-1, 400) // width x height in pixels
+
+    mainBox.append(titleBox)
+    mainBox.append(scroller)
+    mainBox.append(bottomBox)
 
     adapter?.connect("notify::discovering", () =>{
         refreshDiscoveredDevices()
@@ -139,5 +163,5 @@ export default function BluetoothMenu(backButton: Gtk.Button) {
     // })
 
 
-    return scroller
+    return mainBox
 }
