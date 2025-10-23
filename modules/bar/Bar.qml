@@ -1,9 +1,12 @@
 // Bar.qml
 import QtQuick
+import QtQuick.Layouts
 import Quickshell
+import Quickshell.Widgets
 import Quickshell.Hyprland
 import Quickshell.Wayland
 import qs.modules.widgets
+import qs.modules.systemtray
 import qs.singletons
 
 Scope {
@@ -42,21 +45,21 @@ Scope {
         color: '#585858'
       }
 
-      Item {
+      // Main horizontal layout for the taskbar
+      RowLayout {
         anchors.fill: parent
-        ClockWidget {
-          anchors {
-            right: parent.right
-            verticalCenter: parent.verticalCenter
-            rightMargin: 10
-          }
+
+        StartButton{
+          Layout.leftMargin: 5
         }
 
-        StartButton {
-          anchors {
-            left: parent.left
-            verticalCenter: parent.verticalCenter
-            leftMargin: 5
+        Item { Layout.fillWidth: true} // spacer
+
+        WrapperItem{
+          rightMargin: 10
+          RowLayout {
+            SystemTrayButton{}
+            ClockWidget{}
           }
         }
       }
