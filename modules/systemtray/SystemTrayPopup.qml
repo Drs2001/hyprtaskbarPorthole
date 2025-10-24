@@ -2,6 +2,7 @@
 import QtQuick
 import Quickshell
 import Quickshell.Wayland
+import Quickshell.Services.SystemTray
 import qs.singletons
 
 PopupWindow {
@@ -14,9 +15,7 @@ PopupWindow {
     visible: false
     
     implicitWidth: 200
-    implicitHeight: 400
-
-    // WlrLayershell.namespace: "qsBarPopup"  // Unique namespace for blur rules
+    implicitHeight: 200
 
      // Calculate position when visibility changes
     onVisibleChanged: {
@@ -38,7 +37,6 @@ PopupWindow {
         x: 0
         y: -height - 8  // 8px gap above the bar
     }
-    // anchor.gravity: Edges.Top | Edges.HCenter
     anchor.adjustment: PopupAdjustment.None
     
     Rectangle {
@@ -52,65 +50,54 @@ PopupWindow {
             anchors.fill: parent
             anchors.margins: 8
             spacing: 4
-            
-            Text {
-                text: "System Tray"
-                font.bold: true
-                font.pixelSize: 14
-                color: Themes.textColor || "#ffffff"
+        
+            Flow {
+                id: trayIconsFlow
+                width: parent.width
+                spacing: 8
                 padding: 8
-            }
-            
-            Rectangle {
-                width: parent.width
-                height: 1
-                color: Themes.borderColor || "#3b3b3b"
-            }
-            
-            Flickable {
-                width: parent.width
-                height: parent.height - 40
-                contentHeight: trayIconsFlow.height
-                clip: true
                 
-                Flow {
-                    id: trayIconsFlow
-                    width: parent.width
-                    spacing: 8
-                    padding: 8
+                Repeater {
+                    model: SystemTray.items
                     
-                    Repeater {
-                        model: ["🔊", "🔋", "📶", "⚙️", "📋", "🔔"]
+                    Rectangle {
+                        width: 24
+                        height: 24
+                        radius: 6
+                        color: trayMouseArea.containsMouse ? Themes.hoverColor : "transparent"
                         
-                        Rectangle {
-                            width: 48
-                            height: 48
-                            radius: 6
-                            color: trayMouseArea.containsMouse ? Themes.hoverColor : "transparent"
-                            
-                            Text {
-                                anchors.centerIn: parent
-                                text: modelData
-                                font.pixelSize: 24
-                            }
-                            
-                            MouseArea {
-                                id: trayMouseArea
-                                anchors.fill: parent
-                                hoverEnabled: true
-                                onClicked: {
-                                    console.log("Tray item clicked:", modelData)
-                                    popup.visible = false
+                        Image {
+                            anchors.centerIn: parent
+                            width: 16
+                            height: 16
+                            source: modelData.icon
+                            fillMode: Image.PreserveAspectFit
+                        }
+                        
+                        MouseArea {
+                            id: trayMouseArea
+                            acceptedButtons: Qt.LeftButton | Qt.RightButton
+                            anchors.fill: parent
+                            hoverEnabled: true
+                            onPressed: function(mouse) {
+                                if(mouse.button === Qt.LeftButton){
+                                    modelData.activate()
+                                }
+                                else if (mouse.button === Qt.RightButton) {
+                                    if(modelData.hasMenu){
+                                        modelData.display(popup, mouse.x, mouse.y)
+                                    }
                                 }
                             }
-                            
-                            Behavior on color {
-                                ColorAnimation { duration: 150 }
-                            }
+                        }
+                        
+                        Behavior on color {
+                            ColorAnimation { duration: 150 }
                         }
                     }
                 }
             }
+            
         }
     }
 }
