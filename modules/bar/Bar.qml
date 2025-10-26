@@ -63,18 +63,10 @@ Scope {
                     RowLayout {
                         SystemTrayButton{
                             id: trayButton
-                            popupWindow: trayPopup
                         }
                         ClockWidget {}
                     }
                 }
-            }
-            
-            // Popup window - separate from bar hierarchy
-            SystemTrayPopup {
-                id: trayPopup
-                barWindow: root
-                trayButton: trayButton
             }
         }
     }

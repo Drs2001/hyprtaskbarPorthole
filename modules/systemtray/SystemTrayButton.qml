@@ -5,8 +5,6 @@ import qs.singletons
 
 Button {
     id: root
-
-    required property var popupWindow 
     property bool menuOpen: false
 
     implicitWidth: 32
@@ -34,16 +32,16 @@ Button {
     }
 
     onClicked: {
+        if(menuOpen){
+            trayPopup.close()
+        }
+        else{
+            trayPopup.open()
+        }
         menuOpen = !menuOpen
-        popupWindow.visible = menuOpen
     }
 
-    Connections {
-        target: popupWindow
-        function onVisibleChanged() {
-            if (!popupWindow.visible) {
-                menuOpen = false
-            }
-        }
+    SystemTrayPopup{
+        id: trayPopup
     }
 }
