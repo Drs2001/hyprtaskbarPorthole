@@ -1,6 +1,7 @@
 // SystemTrayPopup.qml
 import QtQuick
 import QtQuick.Controls
+import QtQuick.Effects
 import Quickshell
 import Quickshell.Services.SystemTray
 import qs.singletons
@@ -8,13 +9,14 @@ import qs.singletons
 Popup {
     id: popup
     popupType: Popup.Window
-    y: -height - 16
+    y: -height - 12
 
     background: Rectangle {
+        id: trayBackground
         implicitWidth: 200
-        implicitHeight: 200
         color: Themes.backgroundColor
-        border.color: Themes.borderColor
+        border.color: Themes.hoverColor
+        border.width: 1.5
         radius: 10
     }
 
@@ -24,7 +26,6 @@ Popup {
 
     Column {
         anchors.fill: parent
-        anchors.margins: 8
         spacing: 4
     
         Flow {
