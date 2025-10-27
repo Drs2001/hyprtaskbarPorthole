@@ -10,7 +10,6 @@ Button {
     id: root
     property string volumeIcon: "\ueee8"
 
-    implicitWidth: 32
     implicitHeight: 32
 
     PwObjectTracker {
@@ -43,14 +42,18 @@ Button {
 
     Component.onCompleted: updateIcon()
 
-    contentItem: Text {
-        id: arrowIcon
-        text: root.volumeIcon
-        font.family: "Symbols Nerd Font"
-        font.pixelSize: 16
-        color: Themes.textColor
-        horizontalAlignment: Text.AlignHCenter
-        verticalAlignment: Text.AlignVCenter
+    contentItem: RowLayout{
+        spacing: 8
+        Text {
+            id: volumeIcon
+            text: root.volumeIcon
+            font.family: "Symbols Nerd Font"
+            font.pixelSize: 16
+            color: Themes.textColor
+        }
+        NetworkIcon{
+            id: networkIcon
+        }
     }
 
     background: Rectangle {

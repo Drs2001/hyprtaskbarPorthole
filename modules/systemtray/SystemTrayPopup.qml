@@ -9,7 +9,7 @@ import qs.singletons
 Popup {
     id: popup
     popupType: Popup.Window
-    y: -height - 12
+    y: -height - 16
 
     background: Rectangle {
         id: trayBackground
