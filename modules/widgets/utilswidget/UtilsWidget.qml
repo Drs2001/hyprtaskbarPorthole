@@ -9,6 +9,7 @@ import qs.singletons
 Button {
     id: root
     property string volumeIcon: "\ueee8"
+    property bool menuOpen: false
 
     implicitHeight: 32
 
@@ -43,22 +44,22 @@ Button {
     Component.onCompleted: updateIcon()
 
     contentItem: RowLayout{
-        spacing: 8
+        NetworkIcon{
+            id: networkIcon
+            Layout.alignment: Qt.AlignHCenter
+        }
         Text {
             id: volumeIcon
+            Layout.alignment: Qt.AlignHCenter
             text: root.volumeIcon
             font.family: "Symbols Nerd Font"
             font.pixelSize: 16
             color: Themes.textColor
         }
-        NetworkIcon{
-            id: networkIcon
-        }
     }
 
     background: Rectangle {
-        implicitWidth: 32
-        implicitHeight: 32
+        implicitWidth: 50
         color: root.hovered ? Themes.hoverColor : "transparent"
         border.color: root.hovered ? Qt.lighter(Themes.hoverColor, 1.2) : "transparent"
         radius: 6
@@ -70,5 +71,19 @@ Button {
         running: true
         repeat: true
         onTriggered: updateIcon()
+    }
+
+    onClicked: {
+        if(menuOpen){
+            popup.close()
+        }
+        else{
+            popup.open()
+        }
+        menuOpen = !menuOpen
+    }
+
+    UtilsPopup{
+        id: popup
     }
 }

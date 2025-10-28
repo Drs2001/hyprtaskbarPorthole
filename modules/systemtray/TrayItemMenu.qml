@@ -37,7 +37,7 @@ ListView {
 
     color: (modelData?.isSeparator) ? "gray" : rectColor
     height: (modelData?.isSeparator) ? 2 : 28
-    anchors.horizontalCenter: parent.horizontalCenter
+    // anchors.horizontalCenter: parent.horizontalCenter //Was causing error dont even think its needed
     width: (modelData?.isSeparator) ? 300 : 316
     radius: 8
 
