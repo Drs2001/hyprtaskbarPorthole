@@ -24,28 +24,22 @@ Popup {
         menuOpen = false
     }
 
-    Column {
-        anchors.fill: parent
-        spacing: 4
-    
-        Flow {
-            id: trayIconsFlow
-            width: parent.width
-            spacing: 8
-            padding: 8
-            
-            Repeater {
-                id: items
+    Flow {
+        id: trayIconsFlow
+        width: parent.width
+        spacing: 8
+        padding: 8
+        
+        Repeater {
+            id: items
 
-                model: ScriptModel {
-                values: [...SystemTray.items.values]
-                }
+            model: ScriptModel {
+            values: [...SystemTray.items.values]
+            }
 
-                TrayItem {
-                    barPopup: popup
-                }
+            TrayItem {
+                barPopup: popup
             }
         }
-        
     }
 }
