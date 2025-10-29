@@ -7,6 +7,8 @@ import qs.singletons
 Item {
     required property var device
     property bool expanded: false
+
+    width: parent.width
     
     // Dynamically set the height so it changes when we expose the sub menu
     implicitHeight: column.implicitHeight
@@ -75,7 +77,15 @@ Item {
                     text: device.connected ? "Disconnect" : "Connect"
                     width: parent.width - 16
                     onClicked: {
-                        console.log("Connect/Disconnect")
+                        if(!device.connected){
+                            if(!device.paired){
+                                BluetoothManager.enablePairable()
+                            }
+                            device.connect()
+                        }
+                        else{
+                            device.disconnect()
+                        }
                     }
                 }
                 
@@ -84,7 +94,17 @@ Item {
                     width: parent.width - 16
                     visible: device.paired
                     onClicked: {
-                        console.log("Remove device")
+                        device.forget()
+                    }
+                }
+
+                // Set adapter pairable to false and trust device after pairing
+                Connections {
+                    target: device
+                    function onPairedChanged() {
+                        if(!device.trusted && device.paired){
+                            device.trusted = true
+                        }
                     }
                 }
             }
