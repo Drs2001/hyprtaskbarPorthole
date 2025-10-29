@@ -38,28 +38,6 @@ Item {
                     
                 }
             }
-            Button {
-                id: refreshButton
-                implicitHeight: 40
-                implicitWidth: 40
-
-                contentItem: Text{
-                    font.pixelSize: 20
-                    horizontalAlignment: Text.AlignHCenter
-                    verticalAlignment: Text.AlignVCenter
-                    text: "\udb81\udc50"
-                    color: "white"
-                }
-
-                background: Rectangle{
-                    radius: 4
-                    color: refreshButton.hovered ? Themes.hoverColor : "transparent"
-                }
-
-                onClicked: {
-                    BluetoothManager.startDiscovery()
-                }
-            }
         }
 
         ScrollView {
@@ -109,6 +87,32 @@ Item {
                         device: modelData
                         Layout.fillWidth: true
                     }
+                }
+            }
+        }
+        Flow{
+            Layout.fillWidth: true
+            layoutDirection: Qt.RightToLeft
+            Button {
+                id: refreshButton
+                implicitHeight: 40
+                implicitWidth: 40
+
+                contentItem: Text{
+                    font.pixelSize: 20
+                    horizontalAlignment: Text.AlignHCenter
+                    verticalAlignment: Text.AlignVCenter
+                    text: "\udb81\udc50"
+                    color: "white"
+                }
+
+                background: Rectangle{
+                    radius: 4
+                    color: refreshButton.hovered ? Themes.hoverColor : "transparent"
+                }
+
+                onClicked: {
+                    BluetoothManager.startDiscovery()
                 }
             }
         }
