@@ -3,12 +3,12 @@ import QtQuick.Controls
 import QtQuick.Effects
 import QtQuick.Layouts
 import Quickshell
-import Quickshell.Bluetooth
 import qs.singletons
 
 Item {
     implicitHeight: 400
     ColumnLayout {
+        implicitWidth: parent.width
         Flow{
             width: parent.width
             Button {
@@ -35,33 +35,14 @@ Item {
                 }
             }
         }
-        Flow {
-            width: parent.width
-            Button {
-                id: bluetooth
-                implicitHeight: 40
-                implicitWidth: 80
+        Repeater {
+            implicitWidth: parent.width
 
-                contentItem: Text{
-                    font.pixelSize: 20
-                    horizontalAlignment: Text.AlignHCenter
-                    verticalAlignment: Text.AlignVCenter
-                    text: "TEST"
-                    color: "white"
-                }
-
-                background: Rectangle{
-                    radius: 4
-                    color: bluetooth.hovered ? Themes.hoverColor : "gray"
-                }
-
-                onClicked: {
-                    // stack.pop()
-                    var adapter = Bluetooth.defaultAdapter
-                    console.log(adapter.devices.values[1].deviceName)
-                    // adapter.devices.values[1].connect()
-                    
-                }
+            model: BluetoothManager.getDevices()
+            delegate: BTDeviceButton{
+                required property var modelData
+                device: modelData
+                implicitWidth: parent.width
             }
         }
     }
