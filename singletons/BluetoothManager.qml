@@ -26,4 +26,9 @@ Singleton {
         adapter.pairableTimeout = 10 // set the pairable timeout to ensure it always disables pairing (May update later to manual enable/ disable of pairable)
         adapter.pairable = true
     }
+
+    function toggleBluetooth(){
+        // adapter.state = Bluetooth.BluetoothAdapterState.Disabled
+        console.log(Bluetooth.BluetoothAdapterState.Disabled)
+    }
 }

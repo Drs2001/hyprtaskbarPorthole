@@ -12,27 +12,55 @@ Item {
         spacing: 8
         padding: 8
         
-        // Bluetooth button
-        Button {
-            id: bluetooth
-            implicitHeight: 40
-            implicitWidth: 80
+        // Bluetooth Button
+        Row {
+            Button {
+                id: bluetoothToggle
+                implicitHeight: 45
+                implicitWidth: 45
 
-            contentItem: Text{
-                font.pixelSize: 20
-                horizontalAlignment: Text.AlignHCenter
-                verticalAlignment: Text.AlignVCenter
-                text: "\uf293"
-                color: "white"
+                contentItem: Text{
+                    font.pixelSize: 18
+                    horizontalAlignment: Text.AlignHCenter
+                    verticalAlignment: Text.AlignVCenter
+                    text: "\udb80\udcaf"
+                    color: Themes.textColor
+                }
+
+                background: Rectangle{
+                    radius: 0
+                    topLeftRadius: 4
+                    bottomLeftRadius: 4
+                    color: bluetoothToggle.hovered ? Themes.accentHover : Themes.accentColor
+                }
+
+                onClicked: {
+                    //TODO Implement bluetooth toggle
+                }
             }
+            Button {
+                id: bluetoothOpen
+                implicitHeight: 45
+                implicitWidth: 45
 
-            background: Rectangle{
-                radius: 4
-                color: bluetooth.hovered ? Themes.accentHover : Themes.accentColor
-            }
+                contentItem: Text{
+                    font.pixelSize: 15
+                    horizontalAlignment: Text.AlignHCenter
+                    verticalAlignment: Text.AlignVCenter
+                    text: "\uf054"
+                    color: Themes.textColor
+                }
 
-            onClicked: {
-                stack.push("BluetoothMenu.qml") // Push files as QML wraps files as components
+                background: Rectangle{
+                    radius: 0
+                    topRightRadius: 4
+                    bottomRightRadius: 4
+                    color: bluetoothOpen.hovered ? Themes.accentHover : Themes.accentColor
+                }
+
+                onClicked: {
+                    stack.push("BluetoothMenu.qml") // Push files as QML wraps files as components
+                }
             }
         }
     }
