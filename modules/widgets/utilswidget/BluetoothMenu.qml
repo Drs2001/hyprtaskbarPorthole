@@ -25,12 +25,13 @@ Item {
                     horizontalAlignment: Text.AlignHCenter
                     verticalAlignment: Text.AlignVCenter
                     text: "\uf060"
-                    color: "white"
+                    color: Themes.textColor
                 }
 
                 background: Rectangle{
-                    radius: 4
                     color: backButton.hovered ? Themes.hoverColor : "transparent"
+                    border.color: backButton.hovered ? Themes.hoverShadow : "transparent"
+                    radius: 6
                 }
 
                 onClicked: {
@@ -107,8 +108,9 @@ Item {
                 }
 
                 background: Rectangle{
-                    radius: 4
                     color: refreshButton.hovered ? Themes.hoverColor : "transparent"
+                    border.color: refreshButton.hovered ? Themes.hoverShadow : "transparent"
+                    radius: 6
                 }
 
                 onClicked: {

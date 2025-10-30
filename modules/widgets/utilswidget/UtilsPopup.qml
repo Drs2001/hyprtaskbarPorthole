@@ -17,7 +17,7 @@ Popup {
         id: trayBackground
         color: Themes.backgroundColor
         border.color: Themes.hoverColor
-        border.width: 1.5
+        border.width: 1
         radius: 10
     }
 

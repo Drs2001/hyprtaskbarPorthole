@@ -12,6 +12,7 @@ Item {
         spacing: 8
         padding: 8
         
+        // Bluetooth button
         Button {
             id: bluetooth
             implicitHeight: 40
@@ -27,7 +28,7 @@ Item {
 
             background: Rectangle{
                 radius: 4
-                color: bluetooth.hovered ? Themes.hoverColor : "gray"
+                color: bluetooth.hovered ? Themes.accentHover : Themes.accentColor
             }
 
             onClicked: {

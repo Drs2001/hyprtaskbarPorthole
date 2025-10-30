@@ -61,7 +61,7 @@ Button {
     background: Rectangle {
         implicitWidth: 50
         color: root.hovered ? Themes.hoverColor : "transparent"
-        border.color: root.hovered ? Qt.lighter(Themes.hoverColor, 1.2) : "transparent"
+        border.color: root.hovered ? Themes.hoverShadow : "transparent"
         radius: 6
     }
 

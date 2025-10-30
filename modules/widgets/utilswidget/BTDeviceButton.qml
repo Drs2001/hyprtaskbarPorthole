@@ -75,7 +75,7 @@ Item {
 
             background: Rectangle {
                 color: deviceButton.hovered ? Themes.hoverColor : "transparent"
-                border.color: deviceButton.hovered ? Qt.lighter(Themes.hoverColor, 1.2) : "transparent"
+                border.color: deviceButton.hovered ? Themes.hoverShadow : "transparent"
                 radius: 6
             }
         }
