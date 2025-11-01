@@ -9,6 +9,7 @@ Button {
 
     property string imageSource: "root:/assets/arch_blue.png"
     property string alternateImageSource: "root:/assets/toothless.gif"
+    property bool menuOpen: false
 
     implicitWidth: 40
     implicitHeight: 40
@@ -31,7 +32,17 @@ Button {
     }
 
     onClicked: {
-        launcher.running = true
+        if(menuOpen){
+            popup.close()
+        }
+        else{
+            popup.open()
+        }
+        menuOpen = !menuOpen
+    }
+
+    StartPopup{
+        id: popup
     }
 
     // *** Easter Egg :) ***
@@ -54,10 +65,4 @@ Button {
         }
     }
     //*********************
-    
-    Process {
-        id: launcher
-        command: ["walker"]
-        running: false
-    }
 }

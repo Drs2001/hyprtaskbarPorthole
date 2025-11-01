@@ -53,7 +53,7 @@ Item {
 
                 Text {
                     text: "Paired Devices"
-                    color: "white"
+                    color: Themes.textColor
                     font.bold: true
                     Layout.fillWidth: true
                 }
@@ -76,7 +76,7 @@ Item {
 
                 Text {
                     text: "Avaliable Devices"
-                    color: "white"
+                    color: Themes.textColor
                     font.bold: true
                     Layout.fillWidth: true
                 }
@@ -104,7 +104,7 @@ Item {
                     horizontalAlignment: Text.AlignHCenter
                     verticalAlignment: Text.AlignVCenter
                     text: "\udb81\udc50"
-                    color: "white"
+                    color: Themes.textColor
                 }
 
                 background: Rectangle{

@@ -8,6 +8,10 @@ Singleton {
     id: root
 
     property var adapter: Bluetooth.defaultAdapter
+
+    // Booleans used for themeing
+    property var isEnabled: true
+    property var isConnected: false
     
     // Sorted device lists
     property var connectedDevices: adapter.devices.values.filter(d => d.connected)

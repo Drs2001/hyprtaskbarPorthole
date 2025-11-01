@@ -7,6 +7,7 @@ import Quickshell.Widgets
 import Quickshell.Hyprland
 import Quickshell.Wayland
 import qs.modules.widgets
+import qs.modules.widgets.startwidget
 import qs.modules.widgets.utilswidget
 import qs.modules.systemtray
 import qs.singletons

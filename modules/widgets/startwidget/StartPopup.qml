@@ -8,7 +8,7 @@ Popup {
     id: popup
     popupType: Popup.Window
 
-    width: 300
+    width: 600
     height: stack.currentItem.implicitHeight
 
     y: -height - 20
@@ -23,7 +23,7 @@ Popup {
 
     StackView {
         id: stack
-        initialItem: "MainMenu.qml" // We initialize with the file directly as QML automatically wraps seperate files as components
+        initialItem: "StartMenu.qml" // We initialize with the file directly as QML automatically wraps seperate files as components
         anchors.fill: parent
     }
 
