@@ -31,19 +31,10 @@ Item {
         Button {
             id: deviceButton
             width: parent.width
-            height: 40
             text: device.deviceName
             
             onClicked: {
-                if(device.connected) {
-                    expanded = !expanded
-                }
-                else {
-                    if(!device.paired){
-                        BluetoothManager.enablePairable()
-                    }
-                    device.connect()
-                }
+                expanded = !expanded
             }
             
             contentItem: Column {
@@ -135,9 +126,15 @@ Item {
                         if(device.connected){
                             device.disconnect()
                         }
+                        else {
+                            if(!device.paired){
+                                BluetoothManager.enablePairable()
+                            }
+                            device.connect()
+                        }
                     }
                     contentItem: Text{
-                        text: "Disconnect"
+                        text: device.connected ? "Disconnect" : "Connect"
                         color: Themes.textColor
                     }
                     background: Rectangle {
