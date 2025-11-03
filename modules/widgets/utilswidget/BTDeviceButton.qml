@@ -49,6 +49,7 @@ Item {
             contentItem: Column {
                 Text {
                     text: device.deviceName
+                    font.pixelSize: 14
                     color: Themes.textColor
                     verticalAlignment: Text.AlignVCenter
                 }
@@ -69,6 +70,7 @@ Item {
                     }
                     text: getConnectionText()
                     color: Themes.textColor
+                    font.pixelSize: 14
                     verticalAlignment: Text.AlignVCenter
                 }
             }

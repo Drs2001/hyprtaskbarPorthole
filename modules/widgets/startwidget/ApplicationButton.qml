@@ -21,6 +21,7 @@ Item {
                 source: Quickshell.iconPath(application.icon, true)
                 height: 24
                 width: 24
+                fillMode: Image.PreserveAspectFit
             }
             Text{
                 text: application.name

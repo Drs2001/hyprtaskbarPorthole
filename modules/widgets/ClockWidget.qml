@@ -8,6 +8,7 @@ Column {
     anchors.right: parent.right 
 
     font.family: Themes.textFont
+    font.pixelSize: 14
   }
 
   Text {
@@ -16,5 +17,6 @@ Column {
     anchors.right: parent.right
     
     font.family: Themes.textFont
+    font.pixelSize: 14
   }
 }

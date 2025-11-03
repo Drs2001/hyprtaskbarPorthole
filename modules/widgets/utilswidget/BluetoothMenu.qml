@@ -12,7 +12,7 @@ Item {
         anchors.fill: parent
         spacing: 0
 
-        Flow{
+        RowLayout{
             Layout.fillWidth: true
             
             Button {
@@ -39,10 +39,73 @@ Item {
                     
                 }
             }
+            Text{
+                text: "Bluetooth"
+                color: Themes.textColor
+                font.pixelSize: 14
+                verticalAlignment: Text.AlignVCenter
+            }
+
+            Item { Layout.fillWidth: true } // spacer
+
+            Switch {
+                id: toggleSwitch
+                checked: BluetoothManager.adapter.enabled
+                onClicked: BluetoothManager.toggleBluetooth()
+
+                indicator: Rectangle{
+                    implicitWidth: 48
+                    implicitHeight: 26
+                    x: toggleSwitch.leftPadding
+                    y: parent.height / 2 - height / 2
+                    radius: 13
+                    color: toggleSwitch.checked ? Themes.accentColor: "transparent"
+                    border.color: toggleSwitch.checked ? Themes.accentColor : Themes.borderColor
+
+                    Rectangle {
+                        x: toggleSwitch.checked ? parent.width - width : 0
+                        width: 26
+                        height: 26
+                        radius: 13
+                    }
+                }
+            }
+        }
+
+         // Show message when Bluetooth is disabled
+        Item {
+            visible: !BluetoothManager.adapter.enabled
+            Layout.fillWidth: true
+            Layout.fillHeight: true
+            
+            Column{
+                anchors.centerIn: parent
+                width: parent.width
+                spacing: 8
+                Text {
+                    text: "Bluetooth is off"
+                    color: Themes.textColor
+                    font.bold: true
+                    font.pixelSize: 16
+                    leftPadding: 10
+                    rightPadding: 10
+                }
+                Text {
+                    text: "Connect to nearby Bluetooth devices by turning on your Bluetooth using the toggle above."
+                    color: Themes.textColor
+                    font.pixelSize: 12
+                    width: parent.width
+                    wrapMode: Text.WordWrap
+                    horizontalAlignment: Text.AlignLeft
+                    leftPadding: 10
+                    rightPadding: 10
+                }
+            }
         }
 
         ScrollView {
             id: scroll
+            visible: BluetoothManager.adapter.enabled
             Layout.fillWidth: true
             Layout.fillHeight: true
 
@@ -91,6 +154,7 @@ Item {
                 }
             }
         }
+
         Flow{
             Layout.fillWidth: true
             layoutDirection: Qt.RightToLeft
