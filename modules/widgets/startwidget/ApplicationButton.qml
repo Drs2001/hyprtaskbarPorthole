@@ -36,7 +36,15 @@ Item {
         }
 
         onClicked: {
-            application.execute()
+            if(application.runInTerminal){
+                Quickshell.execDetached({
+                    command: ["kitty", ...application.command],
+                    workingDirectory: application.workingDirectory,
+                });
+            }
+            else{
+                application.execute()
+            }
             popup.close()
         }
     }
