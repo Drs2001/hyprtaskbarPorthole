@@ -22,11 +22,10 @@ ScrollView {
 
         Repeater {
             model: ApplicationsManager.openWindows
-            delegate: Text{
+            delegate: WindowButton{
                 required property var modelData
+                window: modelData
                 Layout.fillWidth: true
-                text: modelData.wayland ? modelData.wayland.appId: ""
-                color: Themes.textColor
             }
         }
     }
