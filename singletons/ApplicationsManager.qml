@@ -33,6 +33,7 @@ Singleton {
             var appId = w.wayland.appId
             var application = DesktopEntries.heuristicLookup(appId)
 
+
             // Check if we found something with the heuristic look up and if not check if its  chrome webapp
             if(!application){
                 if(appId.includes("chrome")){
@@ -42,12 +43,18 @@ Singleton {
             
             // Second check incase it was a chrome web app (Probably a simpler way to do this than 2 checks but hey it works so -_('~')_-)
             if(application){
+                var minimized = false
+
                  if(!dict[appId]) {
                     dict[appId] = []
                 }
 
+                if(w.workspace.id == -99){
+                    minimized = true
+                }
                 dict[appId].push({
                     id: appId,
+                    minimized: minimized,
                     window: w,
                     application: application
                 })

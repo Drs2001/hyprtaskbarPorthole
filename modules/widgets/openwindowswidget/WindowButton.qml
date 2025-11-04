@@ -9,6 +9,7 @@ import qs.singletons
 Button {
     id: button
     required property var window
+    property var minimized: false
 
     implicitWidth: 48
     implicitHeight: 48
@@ -28,8 +29,16 @@ Button {
 
     
 
+    //TODO: handle the array of windows that share id, currently just looks at the first window and ignores the others
     onClicked:{
-        console.log(window[0].title)
-        console.log(DesktopEntries.heuristicLookup("Prime Video"))
+        if(window[0].minimized){
+            var workspaceId = Hyprland.focusedWorkspace.id
+            Hyprland.dispatch("movetoworkspacesilent " + workspaceId + ", address:0x" + window[0].window.address);
+            window[0].minimized = false
+        }
+        else {
+            Hyprland.dispatch("movetoworkspacesilent special, address:0x" + window[0].window.address);
+            window[0].minimized = true
+        }
     }
 }
