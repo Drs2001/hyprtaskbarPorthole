@@ -2,11 +2,13 @@ pragma Singleton
 
 import QtQuick
 import Quickshell
+import Quickshell.Hyprland
 
 Singleton {
     id: root
 
     property var entries: []
+    property var openWindows: Hyprland.toplevels
     
     Component.onCompleted: updateEntries()
     

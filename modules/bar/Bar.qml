@@ -9,6 +9,7 @@ import Quickshell.Wayland
 import qs.modules.widgets
 import qs.modules.widgets.startwidget
 import qs.modules.widgets.utilswidget
+import qs.modules.widgets.openwindowswidget
 import qs.modules.systemtray
 import qs.singletons
 
@@ -56,10 +57,13 @@ Scope {
                 StartButton {
                     Layout.leftMargin: 5
                 }
+
+                OpenWindowsScroller{}
                 
                 Item { Layout.fillWidth: true } // spacer
                 
                 WrapperItem {
+                    id: rightWidgets
                     rightMargin: 10
                     
                     RowLayout {
