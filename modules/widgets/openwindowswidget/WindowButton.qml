@@ -38,6 +38,15 @@ Button {
         }
         else {
             Hyprland.dispatch("movetoworkspacesilent special, address:0x" + window[0].window.address);
+
+            // We fullscreen temporarily here to fix a weird bug with hyprland where swapping workspaces while another window is fullscreend cause the sub window to turn invisible
+            // Recreate -> open two windows in the same workspace, fullscreen one to hide the other then change the workspace of the hidden window and it will turn invisible. 
+            // Toggling fullscreen forces a redraw because hyprland doesnt have a redraw command exposed.
+            // (May be fixed in future hyprland releases will check back on this)
+            window[0].window.wayland.fullscreen = true
+            window[0].window.wayland.fullscreen = false
+            //*****************************************************************************/
+
             window[0].minimized = true
         }
     }
