@@ -15,7 +15,7 @@ Button {
     implicitHeight: 48
 
     contentItem: Image{
-        source: Quickshell.iconPath(window[0].application.icon, true)
+        source: window[0].iconPath
         sourceSize.width: 48
         sourceSize.height: 48
         fillMode: Image.PreserveAspectFit
