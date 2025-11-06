@@ -33,11 +33,6 @@ Button {
     onClicked:{
         if(window[0].minimized){
             var workspaceId = Hyprland.focusedWorkspace.id
-            Hyprland.dispatch("movetoworkspacesilent " + workspaceId + ", address:0x" + window[0].window.address);
-            window[0].minimized = false
-        }
-        else {
-            Hyprland.dispatch("movetoworkspacesilent special, address:0x" + window[0].window.address);
 
             // We fullscreen temporarily here to fix a weird bug with hyprland where swapping workspaces while another window is fullscreend cause the sub window to turn invisible
             // Recreate -> open two windows in the same workspace, fullscreen one to hide the other then change the workspace of the hidden window and it will turn invisible. 
@@ -47,6 +42,11 @@ Button {
             window[0].window.wayland.fullscreen = false
             //*****************************************************************************/
 
+            Hyprland.dispatch("movetoworkspacesilent " + workspaceId + ", address:0x" + window[0].window.address);
+            window[0].minimized = false
+        }
+        else {
+            Hyprland.dispatch("movetoworkspacesilent special, address:0x" + window[0].window.address);
             window[0].minimized = true
         }
     }
