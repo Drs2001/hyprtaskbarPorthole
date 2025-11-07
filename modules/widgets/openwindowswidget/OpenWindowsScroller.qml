@@ -24,7 +24,7 @@ ScrollView {
             model: ApplicationsManager.openWindows
             delegate: WindowButton{
                 required property var modelData
-                window: modelData
+                windows: modelData
                 Layout.fillWidth: true
             }
         }

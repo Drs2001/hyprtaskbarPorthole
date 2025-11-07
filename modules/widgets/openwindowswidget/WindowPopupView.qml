@@ -2,58 +2,59 @@ import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls
 import Quickshell
-import Quickshell.Hyprland
 import Quickshell.Wayland
 import qs.singletons
 
-Popup {
-    popupType: Popup.Window
-    y: -height - 10
+PopupWindow {
+    anchor.item: button
+    anchor.rect.y: -height - 20
+    implicitHeight: backgroundRec.height
+    implicitWidth: backgroundRec.width
     
-    background: Rectangle {
+    Rectangle{
+        id: backgroundRec
+        property var padding: 10
+        implicitHeight: previewRowLayout.implicitHeight + padding
+        implicitWidth: previewRowLayout.width + padding
         color: Themes.backgroundColor
-        border.color: Themes.hoverColor
-        border.width: 1.5
-        radius: 10
-    }
 
-    // MouseArea {
-    //     anchors.fill: parent
+        RowLayout{
+            id: previewRowLayout
+            anchors.centerIn: parent
+            spacing: 10
 
-    //     onClicked: {
-    //         console.log("Test")
-    //     }
-    // }
-    
-    contentItem: RowLayout{
-        ColumnLayout{
-            Layout.preferredWidth: 200
-            
-            RowLayout{
-                Layout.fillWidth: true
-                Text{
-                    text: window[0].window.title
-                    color: Themes.textColor
-                    font.pixelSize: 12
-                    elide: Text.ElideRight 
-                    clip: true
-                    Layout.fillWidth: true
-                }
-                Button{
-                    implicitHeight: 24
-                    implicitWidth: 24
-                    text: "X"
-                    Layout.alignment: Qt.AlignRight
-                    onClicked:{
-                        console.log(window)
+             Repeater {
+                model: windows
+                delegate: ColumnLayout{
+                    required property var modelData
+                    Layout.preferredWidth: screenCopyView.width
+
+                    RowLayout{
+                        Text{
+                            text: modelData.window.title
+                            color: Themes.textColor
+                            font.pixelSize: 12
+                            elide: Text.ElideRight 
+                            clip: true
+                            Layout.fillWidth: true
+                        }
+                        Button{
+                            implicitHeight: 24
+                            implicitWidth: 24
+                            text: "X"
+                            Layout.alignment: Qt.AlignRight
+                            onClicked:{
+
+                            }
+                        }
+                    }
+                    ScreencopyView {
+                        id: screenCopyView
+                        constraintSize: Qt.size(200, 100) // declared as (width, height)
+                        captureSource: modelData.window.wayland
+                        live: true
                     }
                 }
-            }
-            ScreencopyView {
-                Layout.preferredWidth: 200
-                constraintSize: Qt.size(200, 200)
-                captureSource: window[0].window.wayland
-                live: true
             }
         }
     }
