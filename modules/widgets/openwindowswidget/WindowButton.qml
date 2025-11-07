@@ -52,30 +52,5 @@ Button {
 
     WindowPopupView{
         id: popup
-        property bool shouldShow: {
-            const hoverConditions = (popupMouseArea.containsMouse || button.hovered)
-            return hoverConditions
-        }
-        onShouldShowChanged: {
-            updateTimer.restart()
-        }
-
-        Timer {
-            id: updateTimer
-            interval: 100
-            onTriggered: {
-                popup.visible = popup.shouldShow
-            }
-        }
-
-        MouseArea {
-            id: popupMouseArea
-            anchors.bottom: parent.bottom
-            implicitWidth: popup.implicitWidth
-            implicitHeight: popup.implicitHeight
-            hoverEnabled: true
-            acceptedButtons: Qt.NoButton
-            propagateComposedEvents: true
-        }
     }
 }

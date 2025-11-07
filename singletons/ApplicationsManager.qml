@@ -73,11 +73,11 @@ Singleton {
                 minimized = true
             }
             dict[appId].push({
-                id: appId,
-                minimized: minimized,
-                window: w,
-                application: application,
-                iconPath: iconPath
+                id: appId, // The wayland app id of the window
+                minimized: minimized, // Whether the window is minimized or not(Meaning if it is in the special workspace or not)
+                window: w, // The quickshell hyprland toplevel object
+                application: application, // The application associated with this window if any
+                iconPath: iconPath // The icon path for the window
             })
             
         })
