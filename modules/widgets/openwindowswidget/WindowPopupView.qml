@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls
+import QtQuick.Effects
 import Quickshell
 import Quickshell.Wayland
 import qs.singletons
@@ -10,6 +11,7 @@ PopupWindow {
     anchor.rect.y: -height - 20
     implicitHeight: backgroundRec.height
     implicitWidth: backgroundRec.width
+    color: "transparent"
 
     property bool anyChildButtonHovered: false // Handles any child buttons we may want to hover
 
@@ -47,10 +49,11 @@ PopupWindow {
     // Popup window background
     Rectangle{
         id: backgroundRec
-        property var padding: 10
+        property var padding: 15
         implicitHeight: previewRowLayout.implicitHeight + padding
         implicitWidth: previewRowLayout.width + padding
         color: Themes.backgroundColor
+        radius: 12
 
         // Row layout to hold all the windows associated with the application
         RowLayout{
@@ -76,8 +79,8 @@ PopupWindow {
                         }
                         Button{
                             id: closeWindowButton
-                            implicitHeight: 24
-                            implicitWidth: 24
+                            implicitHeight: 20
+                            implicitWidth: 20
                             background: Rectangle {
                                 color: closeWindowButton.hovered ? "red" : "transparent"
                                 radius: 5
@@ -104,11 +107,9 @@ PopupWindow {
                             }
                         }
                     }
-                    ScreencopyView {
+                    WindowPreview {
                         id: screenCopyView
-                        constraintSize: Qt.size(200, 100) // declared as (width, height)
-                        captureSource: modelData.window.wayland
-                        live: true
+                        waylandWindow: modelData.window.wayland
                     }
                 }
             }
