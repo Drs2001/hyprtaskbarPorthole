@@ -21,7 +21,7 @@ PopupWindow {
 
     // Whether to open the window or not
     property bool shouldShow: {
-        const hoverConditions = (popupMouseArea.containsMouse || button.hovered || closeButtonHovered || singleWindowHovered)
+        const hoverConditions = (button.hovered || closeButtonHovered || singleWindowHovered)
         return hoverConditions
     }
 
@@ -36,16 +36,6 @@ PopupWindow {
         onTriggered: {
             popup.visible = popup.shouldShow
         }
-    }
-
-    // Mouse area covering the entire popupwindow
-    MouseArea {
-        id: popupMouseArea
-        anchors.fill: parent
-        hoverEnabled: true
-        acceptedButtons: Qt.NoButton
-        propagateComposedEvents: true
-        z: -1 // Allows child mouse events to take priority
     }
     
     // Popup window background
