@@ -72,7 +72,7 @@ Item {
                     Layout.fillWidth: true
                 }
                 Button{
-                    id: powerButton
+                    id: powerMenuButton
 
                     Layout.preferredWidth: 40
                     Layout.preferredHeight: 40
@@ -87,7 +87,7 @@ Item {
                         font.pixelSize: 32
                     }
                     background: Rectangle {
-                        color: powerButton.hovered ? Themes.hoverColor : "transparent"
+                        color: powerMenuButton.hovered ? Themes.hoverColor : "transparent"
                         radius: 6
                     }
 
@@ -97,6 +97,7 @@ Item {
 
                     PowerMenu {
                         id: powerPopup
+                        x: -((powerPopup.width/2) - (powerMenuButton.width/2))
                     }
                 }
             }
