@@ -45,7 +45,7 @@ Popup {
                 radius: 10
             }
             contentItem: Text{
-                text: "\udb81\udf09 Reboot"
+                text: "\udb81\udc59 Reboot"
                 color: Themes.textColor
             }
             onClicked: {
