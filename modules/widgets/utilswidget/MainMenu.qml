@@ -2,6 +2,7 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Effects
 import Quickshell
+import qs.modules.widgets.utilswidget.bluetooth
 import qs.singletons
 
 Item {
