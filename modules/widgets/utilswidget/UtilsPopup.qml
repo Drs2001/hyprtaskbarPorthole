@@ -7,15 +7,16 @@ import qs.singletons
 Popup {
     id: popup
     popupType: Popup.Window
+    padding: 0
 
-    width: 300
+    width: 320
     height: rootStack.currentItem.implicitHeight
 
     y: -height - 20
 
     background: Rectangle {
         id: trayBackground
-        color: Themes.backgroundColor
+        color: Themes.hoverColor
         border.color: Themes.hoverShadow
         border.width: 1
         radius: 10

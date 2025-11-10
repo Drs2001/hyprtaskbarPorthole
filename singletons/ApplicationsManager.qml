@@ -69,8 +69,10 @@ Singleton {
                 dict[appId] = []
             }
 
-            if(w.workspace.id == -99){
-                minimized = true
+            if(w.workspace){
+                if(w.workspace.id == -99){
+                    minimized = true
+                }
             }
             dict[appId].push({
                 id: appId, // The wayland app id of the window

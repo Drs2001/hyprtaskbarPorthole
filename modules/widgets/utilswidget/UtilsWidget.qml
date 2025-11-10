@@ -8,40 +8,9 @@ import qs.singletons
 
 Button {
     id: root
-    property string volumeIcon: "\ueee8"
     property bool menuOpen: false
 
     implicitHeight: 32
-
-    PwObjectTracker {
-        id: sinkTracker
-        objects: [Pipewire.defaultAudioSink]
-    }
-
-    // Function to update the audio icon based on current audio levels
-    function updateIcon(){
-        let sink = Pipewire.defaultAudioSink
-
-        if(sink){
-            if(sink.audio.muted){
-                root.volumeIcon = "\ueee8"
-            }
-            else if(sink.audio.volume > 0.66){
-                root.volumeIcon = "\uf028"
-            }
-            else if(sink.audio.volume > 0.33){
-                root.volumeIcon = "\uf027"
-            }
-            else if(sink.audio.volume > 0){
-                root.volumeIcon = "\uf026"
-            }
-            else{
-                root.volumeIcon = "\ueee8"
-            }
-        }
-    }
-
-    Component.onCompleted: updateIcon()
 
     contentItem: RowLayout{
         NetworkIcon{
@@ -51,7 +20,7 @@ Button {
         Text {
             id: volumeIcon
             Layout.alignment: Qt.AlignHCenter
-            text: root.volumeIcon
+            text: AudioManager.volumeIcon
             font.family: "Symbols Nerd Font"
             font.pixelSize: 16
             color: Themes.textColor
@@ -63,14 +32,6 @@ Button {
         color: root.hovered ? Themes.hoverColor : "transparent"
         border.color: root.hovered ? Themes.hoverShadow : "transparent"
         radius: 6
-    }
-
-    // Timer to poll current audio levels
-    Timer {
-        interval: 100
-        running: true
-        repeat: true
-        onTriggered: updateIcon()
     }
 
     onClicked: {
