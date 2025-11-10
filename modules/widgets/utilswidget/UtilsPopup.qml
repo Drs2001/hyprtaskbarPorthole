@@ -9,7 +9,7 @@ Popup {
     popupType: Popup.Window
 
     width: 300
-    height: stack.currentItem.implicitHeight
+    height: rootStack.currentItem.implicitHeight
 
     y: -height - 20
 
@@ -22,15 +22,15 @@ Popup {
     }
 
     StackView {
-        id: stack
+        id: rootStack
         initialItem: "MainMenu.qml" // We initialize with the file directly as QML automatically wraps seperate files as components
         anchors.fill: parent
     }
 
     // Check if the stack has more than the main menu view on it and if so reset it to display the main menu
     onOpened: {
-        if(stack.depth > 1){
-            stack.pop(null, StackView.Immediate)
+        if(rootStack.depth > 1){
+            rootStack.pop(null, StackView.Immediate)
         }
     }
 

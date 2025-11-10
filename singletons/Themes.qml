@@ -16,6 +16,7 @@ Singleton {
     property color hoverShadow: isDark ? Qt.lighter(backgroundColor, 1.8) : Qt.darker(backgroundColor, 1.038)
     property color accentColor: Qt.rgba(0.09, 0.72, 0.84)
     property color accentHover: isDark ? Qt.lighter(accentColor, 1.8) : Qt.darker(accentColor, 1.8)
+    property color accentTextColor: "black"
     property color buttonDisabled: Qt.lighter(backgroundColor, 1.6)
     property color borderColor: isDark ? Qt.rgba(0.933, 0.933, 0.933, 1.0) : Qt.rgba(0.110, 0.110, 0.110, 1.0)
 

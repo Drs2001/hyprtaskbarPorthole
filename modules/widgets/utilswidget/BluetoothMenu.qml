@@ -6,6 +6,7 @@ import Quickshell
 import qs.singletons
 
 Item {
+    required property var stack
     implicitHeight: 400
 
     ColumnLayout {
