@@ -73,6 +73,7 @@ Item {
                 }
                 Button{
                     id: powerButton
+
                     Layout.preferredWidth: 40
                     Layout.preferredHeight: 40
                     Layout.rightMargin: 15
@@ -88,6 +89,14 @@ Item {
                     background: Rectangle {
                         color: powerButton.hovered ? Themes.hoverColor : "transparent"
                         radius: 6
+                    }
+
+                    onClicked: {
+                        powerPopup.open()
+                    }
+
+                    PowerMenu {
+                        id: powerPopup
                     }
                 }
             }
