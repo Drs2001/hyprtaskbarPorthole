@@ -44,9 +44,10 @@ Item {
                 }
                 Slider {
                     id: control
-                    from: 1
-                    value: 25
-                    to: 100
+                    from: 0
+                    value: AudioManager.volumeLevel
+                    to: 1.5
+                    stepSize: 0.01
 
                     background: Rectangle {
                         x: control.leftPadding
@@ -75,6 +76,16 @@ Item {
                         color: control.pressed ? "#f0f0f0" : "#f6f6f6"
                         border.color: "#bdbebf"
                     }
+
+                    onMoved: {
+                        AudioManager.setVolume(control.value)
+                    }
+                }
+                Text {
+                    text: AudioManager.volumePercentage
+                    font.family: "Symbols Nerd Font"
+                    font.pixelSize: 16
+                    color: Themes.textColor
                 }
             }
         }
