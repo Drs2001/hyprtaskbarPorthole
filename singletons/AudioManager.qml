@@ -66,7 +66,13 @@ Singleton {
     function setVolume(newVolume: real): void {
         if (sink?.ready && sink?.audio) {
             sink.audio.muted = false;
-            sink.audio.volume = Math.max(0, Math.min(1.5, newVolume));
+
+            // We currently use execDetached as setting the volume doesnt always work through the api, specifically for some bluetooth devices.
+            // Using the wireplumber command is more reliable
+            // sink.audio.volume = Math.max(0, Math.min(1.5, newVolume)); may switch back in future update if it becomes more reliable
+            Quickshell.execDetached({
+                    command: ["wpctl", "set-volume", "@DEFAULT_SINK@", Math.max(0, Math.min(1.5, newVolume))]
+            });
         }
     }
 
