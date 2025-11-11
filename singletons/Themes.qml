@@ -16,15 +16,15 @@ Singleton {
 
     readonly property var themes: ({
         "dark": {
-            primaryColor: "#1C1C1C",
-            primaryHoverColor: "#292929",
+            primaryColor: '#181818',
+            primaryHoverColor: '#393939',
             primaryHoverShadow: "#303030",
             textColor: "#FFFFFF",
             accentColor: Qt.rgba(0.09, 0.72, 0.84),
             accentHover: Qt.lighter(Qt.rgba(0.09, 0.72, 0.84), 1.8),
             accentTextColor: "black",
-            popupBackgroundColor: "#242424",
-            utilButtonDisabled: "#313131",
+            popupBackgroundColor: '#202020',
+            utilButtonDisabled: '#2b2b2b',
             utilButtonBorder: '#7e7e7e'
 
         },
