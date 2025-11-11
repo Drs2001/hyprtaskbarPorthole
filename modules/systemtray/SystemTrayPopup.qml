@@ -14,8 +14,8 @@ Popup {
     background: Rectangle {
         id: trayBackground
         implicitWidth: 200
-        color: Themes.backgroundColor
-        border.color: Themes.hoverColor
+        color: Themes.primaryColor
+        border.color: Themes.primaryHoverColor 
         border.width: 1.5
         radius: 10
     }

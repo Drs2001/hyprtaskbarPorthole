@@ -94,7 +94,7 @@ Item {
             id: bottomBar
             Layout.fillWidth: true
             Layout.preferredHeight: 40
-            color: Themes.backgroundColor
+            color: Themes.primaryColor
             bottomLeftRadius: 10
             bottomRightRadius: 10
         }

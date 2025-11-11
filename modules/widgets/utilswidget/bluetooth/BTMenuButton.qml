@@ -17,7 +17,7 @@ Row {
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
             text: "\udb80\udcaf"
-            color: Themes.accentTextColor
+            color: BluetoothManager.adapter?.enabled ? Themes.accentTextColor : Themes.textColor
         }
 
         background: Rectangle{
@@ -30,7 +30,7 @@ Row {
                         return bluetoothToggle.hovered ? Themes.accentHover : Themes.accentColor
                     }
                     else {
-                        return bluetoothToggle.hovered ? Qt.lighter(Themes.buttonDisabled, 1.6) : Themes.buttonDisabled
+                        return bluetoothToggle.hovered ? Themes.primaryHoverColor : Themes.utilButtonDisabled
                     }
                 }
                 else{
@@ -53,7 +53,7 @@ Row {
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
             text: "\uf054"
-            color: Themes.accentTextColor
+            color: BluetoothManager.adapter?.enabled ? Themes.accentTextColor : Themes.textColor
         }
 
         background: Rectangle{
@@ -66,7 +66,7 @@ Row {
                         return bluetoothOpen.hovered ? Themes.accentHover : Themes.accentColor
                     }
                     else {
-                        return bluetoothOpen.hovered ? Qt.lighter(Themes.buttonDisabled, 1.6) : Themes.buttonDisabled
+                        return bluetoothOpen.hovered ? Themes.primaryHoverColor : Themes.utilButtonDisabled
                     }
                 }
                 else{

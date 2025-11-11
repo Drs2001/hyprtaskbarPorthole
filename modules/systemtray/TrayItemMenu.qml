@@ -25,7 +25,7 @@ ListView {
 
   delegate: Rectangle {
     property var textColor: Themes.textColor
-    property var rectColor: mouse.hovered ? Themes.hoverColor : Themes.backgroundColor
+    property var rectColor: mouse.hovered ? Themes.primaryHoverColor : Themes.primaryColor
 
     id: entry
 

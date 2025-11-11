@@ -26,8 +26,8 @@ Button {
     }
 
     background: Rectangle {
-        color: root.hovered ? Themes.hoverColor : "transparent"
-        border.color: root.hovered ? Themes.hoverShadow : "transparent"
+        color: root.hovered ? Themes.primaryHoverColor : "transparent"
+        border.color: root.hovered ? Themes.primaryHoverShadow : "transparent"
         radius: 6
     }
 

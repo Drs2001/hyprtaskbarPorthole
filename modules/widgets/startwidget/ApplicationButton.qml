@@ -30,8 +30,8 @@ Item {
         }
 
         background: Rectangle{
-            color: button.hovered ? Themes.hoverColor : "transparent"
-            border.color: button.hovered ? Themes.hoverShadow : "transparent"
+            color: button.hovered ? Themes.primaryHoverColor : "transparent"
+            border.color: button.hovered ? Themes.primaryHoverShadow : "transparent"
             radius: 6
         }
 

@@ -16,7 +16,7 @@ Popup {
 
     background: Rectangle {
         id: trayBackground
-        color: Themes.hoverColor
+        color: Themes.popupBackgroundColor
         radius: 10
     }
 

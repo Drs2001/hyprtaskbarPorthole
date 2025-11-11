@@ -12,8 +12,8 @@ Popup {
     y: -height
 
     background: Rectangle {
-        color: Themes.backgroundColor
-        border.color: Themes.hoverShadow
+        color: Themes.primaryColor
+        border.color: Themes.primaryHoverShadow
         radius: 10
     }
 
@@ -24,7 +24,7 @@ Popup {
             id: powerButton
             Layout.fillWidth: true
             background: Rectangle{
-                color: powerButton.hovered ? Themes.hoverColor : "transparent"
+                color: powerButton.hovered ? Themes.primaryHoverColor : "transparent"
                 radius: 10
             }
             contentItem: Text{
@@ -41,7 +41,7 @@ Popup {
             id: rebootButton
             Layout.fillWidth: true
              background: Rectangle{
-                color: rebootButton.hovered ? Themes.hoverColor : "transparent"
+                color: rebootButton.hovered ? Themes.primaryHoverColor : "transparent"
                 radius: 10
             }
             contentItem: Text{

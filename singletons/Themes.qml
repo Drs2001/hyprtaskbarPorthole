@@ -6,20 +6,54 @@ import QtQuick
 
 Singleton {
     id: root
-    // Theme mode toggle
-    property bool isDark: true
-
-    // Colors that change based on theme
-    property color backgroundColor: isDark ? Qt.rgba(0.110, 0.110, 0.110, 1.0) : Qt.rgba(0.933, 0.933, 0.933, 1.0)
-    property color textColor: isDark ? Qt.rgba(1, 1, 1) : Qt.rgba(0, 0, 0)
-    property color hoverColor: isDark ? Qt.lighter(backgroundColor, 1.464) : Qt.lighter(backgroundColor, 1.038)
-    property color hoverShadow: isDark ? Qt.lighter(backgroundColor, 1.8) : Qt.darker(backgroundColor, 1.038)
-    property color accentColor: Qt.rgba(0.09, 0.72, 0.84)
-    property color accentHover: isDark ? Qt.lighter(accentColor, 1.8) : Qt.darker(accentColor, 1.8)
-    property color accentTextColor: "black"
-    property color buttonDisabled: Qt.lighter(backgroundColor, 1.6)
-    property color borderColor: isDark ? Qt.rgba(0.933, 0.933, 0.933, 1.0) : Qt.rgba(0.110, 0.110, 0.110, 1.0)
 
     // Font Control
     property string textFont: "Inter"
+
+    readonly property var themeNames: ["dark", "light"]
+
+    property string currentTheme: "dark"
+
+    readonly property var themes: ({
+        "dark": {
+            primaryColor: "#1C1C1C",
+            primaryHoverColor: "#292929",
+            primaryHoverShadow: "#303030",
+            textColor: "#FFFFFF",
+            accentColor: Qt.rgba(0.09, 0.72, 0.84),
+            accentHover: Qt.lighter(Qt.rgba(0.09, 0.72, 0.84), 1.8),
+            accentTextColor: "black",
+            popupBackgroundColor: "#242424",
+            utilButtonDisabled: "#313131",
+            utilButtonBorder: '#7e7e7e'
+
+        },
+        "light": {
+            primaryColor: Qt.rgba(0.933, 0.933, 0.933, 1.0),
+            primaryHoverColor: Qt.lighter(Qt.rgba(0.933, 0.933, 0.933, 1.0), 1.038),
+            primaryHoverShadow: Qt.darker(Qt.rgba(0.933, 0.933, 0.933, 1.0), 1.8),
+            textColor: Qt.rgba(0, 0, 0),
+            accentColor: Qt.rgba(0.09, 0.72, 0.84),
+            accentHover: Qt.darker(Qt.rgba(0.09, 0.72, 0.84), 1.8),
+            accentTextColor: "black",
+            popupBackgroundColor: Qt.lighter(Qt.rgba(0.933, 0.933, 0.933, 1.0), 1.038),
+            utilButtonDisabled: Qt.lighter(Qt.rgba(0.933, 0.933, 0.933, 1.0), 1.03),
+            utilButtonBorder: "#3B3B3B"
+        }
+    })
+
+    // Base colors
+    property color primaryColor: themes[currentTheme].primaryColor
+    property color primaryHoverColor: themes[currentTheme].primaryHoverColor
+    property color primaryHoverShadow: themes[currentTheme].primaryHoverShadow
+    property color textColor: themes[currentTheme].textColor
+    property color accentColor: themes[currentTheme].accentColor
+    property color accentHover: themes[currentTheme].accentHover
+    property color accentTextColor: themes[currentTheme].accentTextColor
+
+    property color popupBackgroundColor: themes[currentTheme].popupBackgroundColor
+
+    // Utility menu pallet
+    property color utilButtonDisabled: themes[currentTheme].utilButtonDisabled
+    property color utilButtonBorder: themes[currentTheme].utilButtonBorder
 }

@@ -30,8 +30,8 @@ Item {
                 }
 
                 background: Rectangle{
-                    color: backButton.hovered ? Themes.hoverColor : "transparent"
-                    border.color: backButton.hovered ? Themes.hoverShadow : "transparent"
+                    color: backButton.hovered ? Themes.primaryHoverColor : "transparent"
+                    border.color: backButton.hovered ? Themes.primaryHoverShadow : "transparent"
                     radius: 6
                 }
 
@@ -61,7 +61,7 @@ Item {
                     y: parent.height / 2 - height / 2
                     radius: 13
                     color: toggleSwitch.checked ? Themes.accentColor: "transparent"
-                    border.color: toggleSwitch.checked ? Themes.accentColor : Themes.borderColor
+                    border.color: toggleSwitch.checked ? Themes.accentColor : Themes.textColor
 
                     Rectangle {
                         x: toggleSwitch.checked ? parent.width - width : 0
@@ -173,8 +173,8 @@ Item {
                 }
 
                 background: Rectangle{
-                    color: refreshButton.hovered ? Themes.hoverColor : "transparent"
-                    border.color: refreshButton.hovered ? Themes.hoverShadow : "transparent"
+                    color: refreshButton.hovered ? Themes.primaryHoverColor : "transparent"
+                    border.color: refreshButton.hovered ? Themes.primaryHoverShadow : "transparent"
                     radius: 6
                 }
 

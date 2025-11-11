@@ -62,7 +62,7 @@ Item {
         Rectangle {
             Layout.fillWidth: true
             Layout.preferredHeight: 50
-            color: Themes.backgroundColor
+            color: Themes.primaryColor
             bottomLeftRadius: 10
             bottomRightRadius: 10
 
@@ -87,7 +87,7 @@ Item {
                         font.pixelSize: 32
                     }
                     background: Rectangle {
-                        color: powerMenuButton.hovered ? Themes.hoverColor : "transparent"
+                        color: powerMenuButton.hovered ? Themes.primaryHoverColor : "transparent"
                         radius: 6
                     }
 

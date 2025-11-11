@@ -67,8 +67,8 @@ Item {
             }
 
             background: Rectangle {
-                color: deviceButton.hovered ? Themes.hoverColor : "transparent"
-                border.color: deviceButton.hovered ? Themes.hoverShadow : "transparent"
+                color: deviceButton.hovered ? Themes.primaryHoverColor : "transparent"
+                border.color: deviceButton.hovered ? Themes.primaryHoverShadow : "transparent"
                 radius: 6
             }
         }
@@ -112,8 +112,8 @@ Item {
                         color: Themes.textColor
                     }
                     background: Rectangle {
-                        color: removeButton.hovered ? Qt.lighter(Themes.hoverColor) : Themes.hoverColor
-                        border.color: removeButton.hovered ? Qt.lighter(Themes.hoverColor, 1.2) : "transparent"
+                        color: removeButton.hovered ? Qt.lighter(Themes.primaryHoverColor) : Themes.primaryHoverColor
+                        border.color: removeButton.hovered ? Qt.lighter(Themes.primaryHoverColor, 1.2) : "transparent"
                         radius: 6
                     }
                 }
@@ -138,8 +138,8 @@ Item {
                         color: Themes.textColor
                     }
                     background: Rectangle {
-                        color: disconnectButton.hovered ? Qt.lighter(Themes.hoverColor) : Themes.hoverColor
-                        border.color: disconnectButton.hovered ? Qt.lighter(Themes.hoverColor, 1.2) : "transparent"
+                        color: disconnectButton.hovered ? Qt.lighter(Themes.primaryHoverColor) : Themes.primaryHoverColor
+                        border.color: disconnectButton.hovered ? Qt.lighter(Themes.primaryHoverColor, 1.2) : "transparent"
                         radius: 6
                     }
                 }

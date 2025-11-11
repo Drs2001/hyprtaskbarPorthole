@@ -24,7 +24,7 @@ Item {
         popupType: Popup.Window
 
         background: Rectangle {
-            color: Themes.backgroundColor
+            color: Themes.primaryColor
             radius: 8
         }
 
@@ -52,7 +52,7 @@ Item {
 
     Rectangle {
         anchors.fill: parent
-        color: mouse.hovered ? Themes.hoverColor : "transparent"
+        color: mouse.hovered ? Themes.primaryHoverColor  : "transparent"
         radius: 5
 
         HoverHandler {

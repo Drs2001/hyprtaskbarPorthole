@@ -23,7 +23,7 @@ Scope {
             screen: modelData
             
             WlrLayershell.namespace: "qsBar"
-            color: Themes.backgroundColor
+            color: Themes.primaryColor
             
             anchors {
                 bottom: true

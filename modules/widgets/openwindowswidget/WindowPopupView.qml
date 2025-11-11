@@ -43,7 +43,7 @@ PopupWindow {
         id: backgroundRec
         implicitHeight: previewRowLayout.implicitHeight
         implicitWidth: previewRowLayout.implicitWidth 
-        color: Themes.backgroundColor
+        color: Themes.primaryColor
         radius: 12
 
         // Row layout to hold all the windows associated with the application
@@ -63,7 +63,7 @@ PopupWindow {
                     implicitWidth: columnLayout.implicitWidth + padding
                     implicitHeight: columnLayout.implicitHeight + padding
                     radius: 12
-                    color: isHovered ? Themes.hoverColor : Themes.backgroundColor
+                    color: isHovered ? Themes.primaryHoverColor : Themes.primaryColor
 
                     ColumnLayout{
                         id: columnLayout
