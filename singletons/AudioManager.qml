@@ -15,14 +15,25 @@ Singleton {
             else if (node.audio)
                 acc.sources.push(node);
         }
+        else{
+            if(node.audio){
+                acc.programs.push(node)
+            }
+        }
         return acc;
     }, {
         sources: [],
-        sinks: []
+        sinks: [],
+        programs: []
     })
 
-    readonly property list<PwNode> sinks: nodes.sinks
-    readonly property list<PwNode> sources: nodes.sources
+    readonly property list<PwNode> sinks: nodes.sinks // A list of hardware devices that can output audio
+    readonly property list<PwNode> sources: nodes.sources // A list of hardware devices that can input audio
+    readonly property list<PwNode> programs: nodes.programs // A list of programs with a audio stream, either outputting audio or inputing
+    readonly property list<PwNode> outputPrograms: programs.filter( // List of programs outputting audio
+        node => node.properties["media.class"]?.includes("Stream/Output/Audio")
+    )
+
     property string volumeIcon: "\ueee8"
     property real volumeLevel: 0.0
     property string volumePercentage: ""
@@ -76,6 +87,10 @@ Singleton {
         }
     }
 
+    function setDefaultSink(newSink: PwNode): void {
+        Pipewire.preferredDefaultAudioSink = newSink
+    }
+
     // Timer to poll current audio levels
     Timer {
         interval: 100
@@ -90,6 +105,6 @@ Singleton {
 
     PwObjectTracker {
         id: sinkTracker
-        objects: [...root.sinks, ...root.sources]
+        objects: [...root.sinks, ...root.sources, ...root.programs]
     }
 }

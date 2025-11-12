@@ -3,6 +3,7 @@ import QtQuick.Controls
 import QtQuick.Layouts
 import Quickshell
 import qs.modules.widgets.utilswidget.bluetooth
+import qs.modules.widgets.utilswidget.audiocontrols
 import qs.singletons
 
 Item {
@@ -81,11 +82,9 @@ Item {
                         AudioManager.setVolume(control.value)
                     }
                 }
-                Text {
-                    text: AudioManager.volumePercentage
-                    font.family: "Symbols Nerd Font"
-                    font.pixelSize: 16
-                    color: Themes.textColor
+                // Bluetooth Button
+                AudioMenuButton{
+                    stack: rootStack
                 }
             }
         }
