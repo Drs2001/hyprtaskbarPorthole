@@ -8,14 +8,14 @@ import qs.singletons
 
 Item {
     id: rootMenu
-    implicitHeight: 400
+    implicitHeight: 300
     ColumnLayout {
         anchors.fill: parent
         spacing: 0
         Flow {
             id: trayIconsFlow
             Layout.fillWidth: true
-            Layout.preferredHeight: (parent.height - bottomBar.height) / 2
+            Layout.preferredHeight: rootMenu.height * 0.55
             Layout.leftMargin: 15
             Layout.topMargin: 20
             spacing: 10
@@ -34,7 +34,7 @@ Item {
 
         ColumnLayout{
             Layout.alignment: Qt.AlignHCenter
-            Layout.preferredHeight: rootMenu.height - trayIconsFlow.height - bottomBar.height
+            Layout.preferredHeight: rootMenu.height * 0.30
             RowLayout{
                 spacing: 20
                 Text {
@@ -92,7 +92,7 @@ Item {
         Rectangle {
             id: bottomBar
             Layout.fillWidth: true
-            Layout.preferredHeight: 40
+            Layout.preferredHeight: rootMenu.height * 0.15
             color: Themes.primaryColor
             bottomLeftRadius: 10
             bottomRightRadius: 10
