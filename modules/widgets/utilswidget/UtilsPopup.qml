@@ -38,26 +38,4 @@ Popup {
     onClosed: {
         menuOpen = false
     }
-
-    enter: Transition {
-        NumberAnimation {
-            property: "y"
-            from: -height - 20
-            to: -height - 20
-            duration: 1  // Instant position
-        }
-        NumberAnimation {
-            property: "scale"
-            from: 0.0
-            to: 1.0
-            duration: 300
-            easing.type: Easing.OutBack
-        }
-        NumberAnimation {
-            property: "opacity"
-            from: 0.0
-            to: 1.0
-            duration: 200
-        }
-    }
 }

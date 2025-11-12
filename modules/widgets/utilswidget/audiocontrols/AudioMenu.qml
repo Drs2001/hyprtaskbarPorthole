@@ -6,8 +6,9 @@ import Quickshell
 import qs.singletons
 
 Item {
+    id: audioMenu
     required property var stack
-    implicitHeight: 400
+    implicitHeight: 300
 
     ColumnLayout {
         anchors.fill: parent
@@ -15,11 +16,12 @@ Item {
 
         RowLayout{
             Layout.fillWidth: true
+            Layout.margins: 5
             
             Button {
                 id: backButton
-                implicitHeight: 40
-                implicitWidth: 40
+                implicitHeight: 32
+                implicitWidth: 32
 
                 contentItem: Text{
                     font.pixelSize: 20
@@ -54,6 +56,9 @@ Item {
             visible: BluetoothManager.adapter.enabled
             Layout.fillWidth: true
             Layout.fillHeight: true
+            Layout.rightMargin: 10
+            Layout.leftMargin: 10
+            Layout.bottomMargin: 10
 
             contentWidth: availableWidth
             ColumnLayout {
@@ -156,6 +161,15 @@ Item {
                     } 
                 }
             }
+        }
+
+        Rectangle {
+            id: bottomBar
+            Layout.fillWidth: true
+            Layout.preferredHeight: audioMenu.height * 0.15
+            color: Themes.primaryColor
+            bottomLeftRadius: 10
+            bottomRightRadius: 10
         }
     }
 }

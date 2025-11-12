@@ -6,8 +6,9 @@ import Quickshell
 import qs.singletons
 
 Item {
+    id: bluetoothMenu
     required property var stack
-    implicitHeight: 400
+    implicitHeight: 300
 
     ColumnLayout {
         anchors.fill: parent
@@ -15,11 +16,12 @@ Item {
 
         RowLayout{
             Layout.fillWidth: true
+            Layout.margins: 5
             
             Button {
                 id: backButton
-                implicitHeight: 40
-                implicitWidth: 40
+                implicitHeight: 32
+                implicitWidth: 32
 
                 contentItem: Text{
                     font.pixelSize: 20
@@ -109,6 +111,9 @@ Item {
             visible: BluetoothManager.adapter.enabled
             Layout.fillWidth: true
             Layout.fillHeight: true
+            Layout.rightMargin: 10
+            Layout.leftMargin: 10
+            Layout.bottomMargin: 10
 
             contentWidth: availableWidth
             ColumnLayout {
@@ -156,30 +161,40 @@ Item {
             }
         }
 
-        Flow{
+        Rectangle {
+            id: bottomBar
             Layout.fillWidth: true
-            layoutDirection: Qt.RightToLeft
-            Button {
-                id: refreshButton
-                implicitHeight: 40
-                implicitWidth: 40
+            Layout.preferredHeight: bluetoothMenu.height * 0.15
+            color: Themes.primaryColor
+            bottomLeftRadius: 10
+            bottomRightRadius: 10
 
-                contentItem: Text{
-                    font.pixelSize: 20
-                    horizontalAlignment: Text.AlignHCenter
-                    verticalAlignment: Text.AlignVCenter
-                    text: "\udb81\udc50"
-                    color: Themes.textColor
-                }
+            RowLayout{
+                anchors.fill: parent
+                layoutDirection: Qt.RightToLeft
+                Button {
+                    id: refreshButton
+                    implicitHeight: 32
+                    implicitWidth: 32
+                    Layout.rightMargin: 10
 
-                background: Rectangle{
-                    color: refreshButton.hovered ? Themes.primaryHoverColor : "transparent"
-                    border.color: refreshButton.hovered ? Themes.primaryHoverShadow : "transparent"
-                    radius: 6
-                }
+                    contentItem: Text{
+                        font.pixelSize: 20
+                        horizontalAlignment: Text.AlignHCenter
+                        verticalAlignment: Text.AlignVCenter
+                        text: "\udb81\udc50"
+                        color: Themes.textColor
+                    }
 
-                onClicked: {
-                    BluetoothManager.startDiscovery()
+                    background: Rectangle{
+                        color: refreshButton.hovered ? Themes.primaryHoverColor : "transparent"
+                        border.color: refreshButton.hovered ? Themes.primaryHoverShadow : "transparent"
+                        radius: 6
+                    }
+
+                    onClicked: {
+                        BluetoothManager.startDiscovery()
+                    }
                 }
             }
         }
