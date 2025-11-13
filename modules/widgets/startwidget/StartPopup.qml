@@ -49,7 +49,7 @@ LazyLoader {
         // (Don't love this solution and will try to find a better one later)
         Timer {
             id: grabTimer
-            interval: 50
+            interval: 100
             onTriggered: {
                 grab.active = true
             }
