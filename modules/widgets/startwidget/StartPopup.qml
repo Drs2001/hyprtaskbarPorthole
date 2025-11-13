@@ -29,16 +29,24 @@ PopupWindow {
     // Check if the stack has more than the main menu view on it and if so reset it to display the main menu
     onVisibleChanged: {
         if(visible){
-            grab.active = true
             if(stack.depth > 1){
                 stack.pop(null, StackView.Immediate)
             }
+            grabTimer.start()
         }
         else{
             if(stack.currentItem && stack.currentItem.resetMenu) {
                 stack.currentItem.resetMenu()
             }
             menuOpen = false
+        }
+    }
+
+    Timer {
+        id: grabTimer
+        interval: 50
+        onTriggered: {
+            grab.active = true
         }
     }
 
