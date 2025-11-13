@@ -45,7 +45,7 @@ Item {
             else{
                 application.execute()
             }
-            popup.close()
+            popup.visible = false
         }
     }
 }
