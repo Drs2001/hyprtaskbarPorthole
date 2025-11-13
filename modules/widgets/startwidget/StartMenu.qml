@@ -14,6 +14,7 @@ Item {
         searchBar.text = ""
         scroll.ScrollBar.vertical.position = 0
         powerPopup.close()
+        ApplicationsManager.updateEntries()
     }
 
     ColumnLayout {
@@ -33,6 +34,10 @@ Item {
                 implicitWidth: parent.width
                 color: "transparent"
                 radius: 5
+            }
+
+            onTextEdited: {
+                ApplicationsManager.updateEntries(searchBar.text)
             }
         }
         

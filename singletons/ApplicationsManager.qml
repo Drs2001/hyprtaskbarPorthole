@@ -20,8 +20,16 @@ Singleton {
         }
     }
     
-    function updateEntries() {
+    // Updates desktop entries and filters by the passed string
+    function updateEntries(filterString) {
         var apps = DesktopEntries.applications.values.slice()
+
+        if (filterString && filterString.length > 0) {
+            apps = apps.filter(app => 
+                app.name.toLowerCase().includes(filterString.toLowerCase())
+            )
+        }
+
         entries = apps.sort((a, b) => a.name.localeCompare(b.name))
     }
 
