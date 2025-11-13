@@ -30,11 +30,14 @@ PopupWindow {
     onVisibleChanged: {
         if(visible){
             grab.active = true
-            if(rootStack.depth > 1){
-                rootStack.pop(null, StackView.Immediate)
+            if(stack.depth > 1){
+                stack.pop(null, StackView.Immediate)
             }
         }
         else{
+            if(stack.currentItem && stack.currentItem.resetMenu) {
+                stack.currentItem.resetMenu()
+            }
             menuOpen = false
         }
     }

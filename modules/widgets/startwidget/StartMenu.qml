@@ -7,10 +7,33 @@ import qs.singletons
 
 Item {
     implicitHeight: 500
+    
+    // Used to reset the menu view
+    function resetMenu() {
+        searchBar.focus = false
+        searchBar.text = ""
+        scroll.ScrollBar.vertical.position = 0
+    }
 
     ColumnLayout {
         anchors.fill: parent
         spacing: 0
+        
+        TextField {
+            id: searchBar
+            Layout.fillWidth: true
+            Layout.margins: 15
+            placeholderText: qsTr("Search for apps")
+            color: Themes.textColor
+            placeholderTextColor: Themes.textColor
+
+            background: Rectangle {
+                implicitHeight: 10
+                implicitWidth: parent.width
+                color: "transparent"
+                radius: 5
+            }
+        }
         
         Text {
             text: "All apps"
@@ -76,7 +99,7 @@ Item {
 
                     Layout.preferredWidth: 40
                     Layout.preferredHeight: 40
-                    Layout.rightMargin: 15
+                    Layout.rightMargin: 50
                     Layout.alignment: Qt.AlignVCenter
 
                     contentItem: Text{

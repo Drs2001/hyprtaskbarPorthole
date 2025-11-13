@@ -7,7 +7,7 @@ import qs.singletons
 Popup {
     height: 100
     width: 100
-    popupType: Popup.Window
+    popupType: Popup.Item
 
     y: -height
 
