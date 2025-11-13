@@ -36,10 +36,10 @@ Button {
 
     onClicked: {
         if(menuOpen){
-            popup.close()
+            popup.visible = false
         }
         else{
-            popup.open()
+            popup.visible = true
         }
         menuOpen = !menuOpen
     }
