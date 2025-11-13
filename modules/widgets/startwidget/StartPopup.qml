@@ -2,38 +2,50 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Effects
 import Quickshell
+import Quickshell.Hyprland
 import qs.singletons
 
-Popup {
+PopupWindow {
     id: popup
-    popupType: Popup.Window
-    padding: 0
+    anchor.item: root
+    anchor.rect.y: -height - 20
+    implicitWidth: 600
+    implicitHeight: stack.currentItem.implicitHeight
+    color: "transparent"
 
-    width: 600
-    height: stack.currentItem.implicitHeight
-
-    y: -height - 20
-
-    background: Rectangle {
+    Rectangle {
         id: trayBackground
+        anchors.fill: parent
         color: Themes.popupBackgroundColor
         radius: 10
-    }
 
-    StackView {
-        id: stack
-        initialItem: "StartMenu.qml" // We initialize with the file directly as QML automatically wraps seperate files as components
-        anchors.fill: parent
-    }
-
-    // Check if the stack has more than the main menu view on it and if so reset it to display the main menu
-    onOpened: {
-        if(stack.depth > 1){
-            stack.pop(null, StackView.Immediate)
+        StackView {
+            id: stack
+            initialItem: "StartMenu.qml" // We initialize with the file directly as QML automatically wraps seperate files as components
+            anchors.fill: parent
         }
     }
 
-    onClosed: {
-        menuOpen = false
+    // Check if the stack has more than the main menu view on it and if so reset it to display the main menu
+    onVisibleChanged: {
+        if(visible){
+            grab.active = true
+            if(rootStack.depth > 1){
+                rootStack.pop(null, StackView.Immediate)
+            }
+        }
+        else{
+            menuOpen = false
+        }
+    }
+
+    // Give focus to popup window to allow for keyboard inputs and clicking off detection
+    HyprlandFocusGrab {
+        id: grab
+        windows: [ popup ]
+
+        onCleared: {
+            popup.visible = false
+        }
     }
 }
