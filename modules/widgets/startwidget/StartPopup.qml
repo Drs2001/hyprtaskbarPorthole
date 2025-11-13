@@ -5,58 +5,64 @@ import Quickshell
 import Quickshell.Hyprland
 import qs.singletons
 
-PopupWindow {
-    id: popup
-    anchor.item: root
-    anchor.rect.y: -height - 20
-    implicitWidth: 600
-    implicitHeight: stack.currentItem.implicitHeight
-    color: "transparent"
+LazyLoader {
+    loading: true
 
-    Rectangle {
-        id: trayBackground
-        anchors.fill: parent
-        color: Themes.popupBackgroundColor
-        radius: 10
+    PopupWindow {
+        id: popup
+        anchor.item: root
+        anchor.rect.y: -height - 20
+        implicitWidth: 600
+        implicitHeight: stack.currentItem.implicitHeight
+        color: "transparent"
 
-        StackView {
-            id: stack
-            initialItem: "StartMenu.qml" // We initialize with the file directly as QML automatically wraps seperate files as components
+        Rectangle {
+            id: trayBackground
             anchors.fill: parent
-        }
-    }
+            color: Themes.popupBackgroundColor
+            radius: 10
 
-    // Check if the stack has more than the main menu view on it and if so reset it to display the main menu
-    onVisibleChanged: {
-        if(visible){
-            if(stack.depth > 1){
-                stack.pop(null, StackView.Immediate)
+            StackView {
+                id: stack
+                initialItem: "StartMenu.qml" // We initialize with the file directly as QML automatically wraps seperate files as components
+                anchors.fill: parent
             }
-            grabTimer.start()
         }
-        else{
-            if(stack.currentItem && stack.currentItem.resetMenu) {
-                stack.currentItem.resetMenu()
+
+        // Check if the stack has more than the main menu view on it and if so reset it to display the main menu
+        onVisibleChanged: {
+            if(visible){
+                if(stack.depth > 1){
+                    stack.pop(null, StackView.Immediate)
+                }
+                grabTimer.start()
             }
-            menuOpen = false
+            else{
+                if(stack.currentItem && stack.currentItem.resetMenu) {
+                    stack.currentItem.resetMenu()
+                }
+                menuOpen = false
+            }
         }
-    }
 
-    Timer {
-        id: grabTimer
-        interval: 50
-        onTriggered: {
-            grab.active = true
+        // Add a small delay to allow wayland to finish mapping the popupwindow
+        // (Don't love this solution and will try to find a better one later)
+        Timer {
+            id: grabTimer
+            interval: 50
+            onTriggered: {
+                grab.active = true
+            }
         }
-    }
 
-    // Give focus to popup window to allow for keyboard inputs and clicking off detection
-    HyprlandFocusGrab {
-        id: grab
-        windows: [ popup ]
+        // Give focus to popup window to allow for keyboard inputs and clicking off detection
+        HyprlandFocusGrab {
+            id: grab
+            windows: [ popup ]
 
-        onCleared: {
-            popup.visible = false
+            onCleared: {
+                popup.visible = false
+            }
         }
     }
 }

@@ -13,6 +13,7 @@ Item {
         searchBar.focus = false
         searchBar.text = ""
         scroll.ScrollBar.vertical.position = 0
+        powerPopup.close()
     }
 
     ColumnLayout {
