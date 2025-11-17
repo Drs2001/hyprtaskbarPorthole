@@ -76,6 +76,32 @@ Item {
                         radius: 13
                         color: control.pressed ? "#f0f0f0" : "#f6f6f6"
                         border.color: "#bdbebf"
+
+                        Popup {
+                            id: handlePopup
+                            popupType: Popup.Item
+                            y: -height - 10
+                            x: (parent.width - width) / 2
+                            visible: hoverHandler.hovered || control.pressed
+                            closePolicy: Popup.NoAutoClose
+
+                            background: Rectangle {
+                                implicitWidth: 40
+                                implicitHeight: 20
+                                color: Themes.primaryColor
+                                radius: 5
+                            }
+
+                            contentItem: Text {
+                                horizontalAlignment: Text.AlignHCenter
+                                text: Math.round(AudioManager.volumeLevel * 100)
+                                color: Themes.textColor
+                            }
+                        }
+
+                        HoverHandler {
+                            id: hoverHandler
+                        }
                     }
 
                     onMoved: {
