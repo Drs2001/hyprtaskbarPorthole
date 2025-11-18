@@ -115,9 +115,23 @@ Item {
                                 color: applicationToggle.hovered ? Themes.primaryHoverColor : "transparent"
                                 radius: 5
                             }
-                            contentItem: Image {
-                                fillMode: Image.PreserveAspectFit
-                                source: Quickshell.iconPath(modelData.properties["application.icon-name"] || "application-menu", true)
+                            contentItem: Item {
+                                anchors.fill: parent
+                                Image {
+                                    height: 26
+                                    width: 26
+                                    anchors.centerIn: parent
+                                    fillMode: Image.PreserveAspectFit
+                                    source: Quickshell.iconPath(modelData.properties["application.icon-name"] || "application-menu", true)
+                                }
+                                Text {
+                                    anchors.bottom: parent.bottom
+                                    anchors.right: parent.right
+                                    text: "X"
+                                    color: "red"
+                                    font.pixelSize: 10
+                                    visible: modelData.audio.muted
+                                }
                             }
 
                             onClicked: {
