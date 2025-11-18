@@ -19,7 +19,8 @@ Singleton {
             appName: notification.appName,
             summary: notification.summary,
             body: notification.body,
-            icon: notification.image,
+            icon: notification.appIcon,
+            image: notification.image,
             timestamp: Date.now()
         })
         notifications = tempList
