@@ -95,7 +95,7 @@ Scope {
             }
 
             Variants {
-                model: NotificationManager.notifications
+                model: NotificationManager.visibleNotifications
 
                 NotificationPopup {
                     id: notificationPopup

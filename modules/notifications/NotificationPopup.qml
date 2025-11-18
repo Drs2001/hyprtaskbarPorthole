@@ -13,15 +13,15 @@ PanelWindow {
     color: "transparent"
 
     anchors {
-        top: true
+        bottom: true
         right: true
     }
     
     implicitHeight: contentRect.implicitHeight
-    implicitWidth: 200
+    implicitWidth: 300
     
     margins {
-        top: 20
+        bottom: 20
         right: 20
     }
 
@@ -78,7 +78,7 @@ PanelWindow {
                     }
 
                     onClicked: {
-                        NotificationManager.removeNotification(modelData.id)
+                        NotificationManager.updateVisibleNotification()
                     }
                 }
             }
@@ -107,7 +107,7 @@ PanelWindow {
         id: dismissTimer
         interval: 5000
         onTriggered: {
-            NotificationManager.removeNotification(modelData.id)
+            NotificationManager.updateVisibleNotification()
         }
     }
 
