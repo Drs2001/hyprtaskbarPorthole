@@ -30,6 +30,7 @@ Scope {
 
         onNotification: (notification) => {
             NotificationManager.addNotification(notification)
+            notification.tracked = true
         }
     }
     Variants {
