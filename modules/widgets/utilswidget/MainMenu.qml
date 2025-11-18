@@ -37,11 +37,26 @@ Item {
             Layout.preferredHeight: rootMenu.height * 0.30
             RowLayout{
                 spacing: 20
-                Text {
-                    text: AudioManager.volumeIcon
-                    font.family: "Symbols Nerd Font"
-                    font.pixelSize: 16
-                    color: Themes.textColor
+                Button {
+                    id: audioToggle
+                    background: Rectangle {
+                        implicitHeight: 32
+                        implicitWidth: 32
+                        color: audioToggle.hovered ? Themes.primaryHoverColor : "transparent"
+                        radius: 5
+                    }
+                    contentItem: Text {
+                        text: AudioManager.volumeIcon
+                        horizontalAlignment: Text.AlignHCenter
+                        verticalAlignment: Text.AlignVCenter
+                        font.family: "Symbols Nerd Font"
+                        font.pixelSize: 16
+                        color: Themes.textColor
+                    }
+
+                    onClicked: {
+                        AudioManager.toggleSinkMute()
+                    }
                 }
                 Slider {
                     id: control

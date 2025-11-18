@@ -108,14 +108,20 @@ Item {
                         Layout.fillWidth: true
 
                         Button{
+                            id: applicationToggle
                             Layout.preferredWidth: 32
                             Layout.preferredHeight: 32
                             background: Rectangle{
-                                color: "transparent"
+                                color: applicationToggle.hovered ? Themes.primaryHoverColor : "transparent"
+                                radius: 5
                             }
                             contentItem: Image {
                                 fillMode: Image.PreserveAspectFit
                                 source: Quickshell.iconPath(modelData.properties["application.icon-name"] || "application-menu", true)
+                            }
+
+                            onClicked: {
+                                modelData.audio.muted = !modelData.audio.muted
                             }
                         }
                         Slider {
@@ -180,6 +186,7 @@ Item {
                             }
 
                             onMoved: {
+                                modelData.audio.muted = false
                                 modelData.audio.volume = control.value
                             }
                         }

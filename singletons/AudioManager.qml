@@ -87,6 +87,12 @@ Singleton {
         }
     }
 
+    function toggleSinkMute(): void {
+        if (sink?.ready && sink?.audio) {
+            sink.audio.muted = !sink.audio.muted;
+        }
+    }
+
     function setDefaultSink(newSink: PwNode): void {
         Pipewire.preferredDefaultAudioSink = newSink
     }
