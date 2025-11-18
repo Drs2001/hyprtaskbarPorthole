@@ -6,14 +6,32 @@ import Quickshell
 import Quickshell.Widgets
 import Quickshell.Hyprland
 import Quickshell.Wayland
+import Quickshell.Services.Notifications
 import qs.modules.widgets
 import qs.modules.widgets.startwidget
 import qs.modules.widgets.utilswidget
 import qs.modules.widgets.openwindowswidget
 import qs.modules.systemtray
+import qs.modules.notifications
 import qs.singletons
 
 Scope {
+    NotificationServer{
+        id: notificationServer
+        
+        actionsSupported: true
+        bodyHyperlinksSupported: true
+        bodyImagesSupported: true
+        bodyMarkupSupported: true
+        bodySupported: true
+        imageSupported: true
+        keepOnReload: false
+        persistenceSupported: true
+
+        onNotification: (notification) => {
+            NotificationManager.addNotification(notification)
+        }
+    }
     Variants {
         model: Quickshell.screens
         
@@ -73,6 +91,14 @@ Scope {
                         UtilsWidget{}
                         ClockWidget {}
                     }
+                }
+            }
+
+            Variants {
+                model: NotificationManager.notifications
+
+                NotificationPopup {
+                    id: notificationPopup
                 }
             }
         }
