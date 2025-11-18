@@ -74,6 +74,7 @@ Item {
                 Repeater {
                     model: AudioManager.sinks
                     delegate: Button{
+                        id: sinkButton
                         required property var modelData
                         Layout.fillWidth: true
                         text: modelData.description
@@ -86,7 +87,7 @@ Item {
                         }
 
                         background: Rectangle{
-                            color: (modelData.id == AudioManager.sink.id) ? Themes.primaryHoverColor : "transparent"
+                            color: ((modelData.id == AudioManager.sink.id) || sinkButton.hovered) ? Themes.primaryHoverColor : "transparent"
                             radius: 8
                         }
 
@@ -130,6 +131,7 @@ Item {
                                     text: "X"
                                     color: "red"
                                     font.pixelSize: 10
+                                    font.bold: true
                                     visible: modelData.audio.muted
                                 }
                             }
