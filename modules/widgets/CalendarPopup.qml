@@ -13,7 +13,6 @@ LazyLoader {
         id: popup
         property var month: new Date().getMonth()
         property var year: new Date().getFullYear()
-        property string todaysDate: Qt.formatDate(new Date(), "dddd, MMMM d")
         property var monthNames: [
             "January", "Febuary", "March", "April", "May", "June",
             "July", "August", "September", "October", "November", "December"
@@ -45,7 +44,7 @@ LazyLoader {
                         anchors.verticalCenter: parent.verticalCenter
                         anchors.left: parent.left
                         anchors.leftMargin: 10
-                        text: todaysDate
+                        text: Time.todaysDate
                         font.pixelSize: 14
                         color: Themes.textColor
                     }

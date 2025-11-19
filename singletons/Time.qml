@@ -8,6 +8,7 @@ Singleton {
   id: root
   property string time
   property string date
+  property string todaysDate
 
   Process {
     id: timeProc
@@ -17,13 +18,6 @@ Singleton {
     stdout: StdioCollector {
       onStreamFinished: root.time = this.text
     }
-  }
-
-  Timer {
-    interval: 1000
-    running: true
-    repeat: true
-    onTriggered: timeProc.running = true
   }
 
   Process {
@@ -40,6 +34,10 @@ Singleton {
     interval: 1000
     running: true
     repeat: true
-    onTriggered: dateProc.running = true
+    onTriggered: {
+      timeProc.running = true
+      dateProc.running = true
+      todaysDate = Qt.formatDate(new Date(), "dddd, MMMM d")
+    }
   }
 }
