@@ -18,7 +18,12 @@ Singleton {
         return null
     }
 
-    property var isLaptop: UPower.onBattery
+    property var isLaptop: {
+        if(battery){
+            return true
+        }
+        return false
+    }
 
     property var batteryPercentage: {
         if(battery){
@@ -29,15 +34,7 @@ Singleton {
         }
     }
 
-    property var isCharging: {
-        if(battery){
-            if(changeRate > 0){
-                return true
-            }
-            return false
-        }
-        return false
-    }
+    property var isCharging: updateChargeIndicator()
 
     property var batteryIcon: "\uf244"
 
@@ -61,12 +58,23 @@ Singleton {
         }
     }
 
+    function updateChargeIndicator(){
+        if(battery){
+            if(battery.timeToFull > 0){
+                return true
+            }
+            return false
+        }
+        return false
+    }
+
     Timer {
         interval: 100
         running: true
         repeat: true
         onTriggered: {
             updateIcon()
+            updateChargeIndicator()
         }
     }
 
