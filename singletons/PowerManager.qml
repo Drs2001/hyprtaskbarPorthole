@@ -11,7 +11,7 @@ Singleton {
     property var battery: {
         for(var i = 0; i < UPower.devices.values.length; i++) {
             var device = UPower.devices.values[i]
-            if(device.type === UPowerDeviceType.Battery){
+            if(device.isLaptopBattery){
                 return device
             }
         }
@@ -27,6 +27,16 @@ Singleton {
         else{
             return -1
         }
+    }
+
+    property var isCharging: {
+        if(battery){
+            if(changeRate > 0){
+                return true
+            }
+            return false
+        }
+        return false
     }
 
     property var batteryIcon: "\uf244"
