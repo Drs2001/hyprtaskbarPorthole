@@ -43,17 +43,33 @@ Singleton {
     })
 
     // Base colors
-    property color primaryColor: themes[currentTheme].primaryColor
-    property color primaryHoverColor: themes[currentTheme].primaryHoverColor
-    property color primaryHoverShadow: themes[currentTheme].primaryHoverShadow
-    property color textColor: themes[currentTheme].textColor
-    property color accentColor: themes[currentTheme].accentColor
-    property color accentHover: themes[currentTheme].accentHover
+    // property color primaryColor: themes[currentTheme].primaryColor
+    property color primaryColor: activePalette.window
+    // property color primaryHoverColor: themes[currentTheme].primaryHoverColor
+    property color primaryHoverColor: activePalette.highlight
+    // property color primaryHoverShadow: themes[currentTheme].primaryHoverShadow
+    property color primaryHoverShadow: activePalette.shadow
+    // property color textColor: themes[currentTheme].textColor
+    property color textColor: activePalette.text
+    // property color accentColor: themes[currentTheme].accentColor
+    property color accentColor: activePalette.accent
+    // property color accentHover: themes[currentTheme].accentHover
+    property color accentHover: Qt.lighter(activePalette.accent, 1.8)
     property color accentTextColor: themes[currentTheme].accentTextColor
 
-    property color popupBackgroundColor: themes[currentTheme].popupBackgroundColor
+    // property color popupBackgroundColor: themes[currentTheme].popupBackgroundColor
+    property color popupBackgroundColor: activePalette.base
 
     // Utility menu pallet
-    property color utilButtonDisabled: themes[currentTheme].utilButtonDisabled
+    // property color utilButtonDisabled: themes[currentTheme].utilButtonDisabled
+    property color utilButtonDisabled: disabledPalette.accent
     property color utilButtonBorder: themes[currentTheme].utilButtonBorder
+
+    property SystemPalette activePalette: SystemPalette {
+        colorGroup: SystemPalette.Active
+    }
+
+    property SystemPalette disabledPalette: SystemPalette {
+        colorGroup: SystemPalette.Disabled
+    }
 }
