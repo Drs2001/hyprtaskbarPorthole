@@ -1,12 +1,57 @@
 pragma Singleton
 
 import Quickshell
+import Quickshell.Io
 import Quickshell.Services.UPower
 import QtQuick
 
 Singleton {
     id: root
 
+    property var battery: {
+        for(var i = 0; i < UPower.devices.values.length; i++) {
+            var device = UPower.devices.values[i]
+            if(device.type === UPowerDeviceType.Battery){
+                return device
+            }
+        }
+        return null
+    }
+
     property var isLaptop: UPower.onBattery
+
+    property var batteryPercentage: Math.round(battery.percentage * 100)
+
+    property var batteryIcon: "\uf244"
+
+    function updateIcon(){
+        if(battery){
+            if(batteryPercentage > 80){
+                batteryIcon = "\uf240"
+            }
+            else if(batteryPercentage > 0.60){
+                batteryIcon = "\uf241"
+            }
+            else if(batteryPercentage > 0.40){
+                batteryIcon = "\uf242"
+            }
+            else if(batteryPercentage > 20){
+                batteryIcon = "\uf243"
+            }
+            else{
+                batteryIcon = "\uf244"
+            }
+        }
+    }
+
+    Timer {
+        interval: 100
+        running: true
+        repeat: true
+        onTriggered: {
+            updateIcon()
+        }
+    }
+
     
 }
