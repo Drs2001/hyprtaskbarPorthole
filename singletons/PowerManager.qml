@@ -20,7 +20,14 @@ Singleton {
 
     property var isLaptop: UPower.onBattery
 
-    property var batteryPercentage: Math.round(battery.percentage * 100)
+    property var batteryPercentage: {
+        if(battery){
+            return Math.round(battery.percentage * 100)
+        }
+        else{
+            return -1
+        }
+    }
 
     property var batteryIcon: "\uf244"
 
