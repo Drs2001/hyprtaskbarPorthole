@@ -86,6 +86,12 @@ Scope {
                     rightMargin: 10
                     
                     RowLayout {
+                        Button {
+                            text: "test"
+                            onClicked: {
+                                console.log(PowerManager.isLaptop)
+                            }
+                        }
                         SystemTrayButton{
                             id: trayButton
                         }

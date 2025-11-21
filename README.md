@@ -16,4 +16,5 @@ The desktop environment for Porthole, my custom linux distribution built on arch
  - pipewire
  - ttf-inter
  - ttf-nerd-fonts-symbols
+ - Upower-git
 
