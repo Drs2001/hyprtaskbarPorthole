@@ -17,4 +17,5 @@ The desktop environment for Porthole, my custom linux distribution built on arch
  - ttf-inter
  - ttf-nerd-fonts-symbols
  - Upower-git
+ - PowerProfiles Daemon
 

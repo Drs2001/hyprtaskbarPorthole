@@ -4,6 +4,7 @@ import QtQuick.Layouts
 import Quickshell
 import qs.modules.widgets.utilswidget.bluetooth
 import qs.modules.widgets.utilswidget.audiocontrols
+import qs.modules.widgets.utilswidget.powerprofiles
 import qs.singletons
 
 Item {
@@ -18,10 +19,14 @@ Item {
             Layout.preferredHeight: rootMenu.height * 0.55
             Layout.leftMargin: 15
             Layout.topMargin: 20
-            spacing: 10
+            spacing: 20
             
             // Bluetooth Button
             BTMenuButton{
+                stack: rootStack
+            }
+
+            PPMenuButton{
                 stack: rootStack
             }
         }
