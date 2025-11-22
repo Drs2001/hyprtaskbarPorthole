@@ -21,8 +21,8 @@ ColumnLayout{
             font.pixelSize: 24
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
-            text: "\ueacd"
-            color: Themes.accentTextColor
+            text: "\udb81\udda8"
+            color: isNightLightEnabled ? Themes.accentTextColor : Themes.textColor
         }
 
         background: Rectangle{
