@@ -12,7 +12,7 @@ LazyLoader{
         id: popup
         anchor.item: root
         anchor.rect.y: -height - 20
-        implicitWidth: 320
+        implicitWidth: 340
         implicitHeight: rootStack.currentItem.implicitHeight
         color: "transparent"
 

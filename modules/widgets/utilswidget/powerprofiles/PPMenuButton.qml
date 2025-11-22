@@ -6,8 +6,6 @@ import Quickshell.Services.UPower
 import qs.singletons
 
 ColumnLayout{
-    required property var stack
-
     width: 90
 
     Button {

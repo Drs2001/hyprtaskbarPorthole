@@ -26,9 +26,8 @@ Item {
                 stack: rootStack
             }
 
-            PPMenuButton{
-                stack: rootStack
-            }
+            // Power profiles switch
+            PPMenuButton{}
         }
 
         Rectangle {
