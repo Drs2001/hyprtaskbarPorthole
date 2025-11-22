@@ -5,6 +5,7 @@ import Quickshell
 import qs.modules.widgets.utilswidget.bluetooth
 import qs.modules.widgets.utilswidget.audiocontrols
 import qs.modules.widgets.utilswidget.powerprofiles
+import qs.modules.widgets.utilswidget.nightlight
 import qs.singletons
 
 Item {
@@ -28,6 +29,9 @@ Item {
 
             // Power profiles switch
             PPMenuButton{}
+
+            // Night light toggle
+            NightLightButton{}
         }
 
         Rectangle {
